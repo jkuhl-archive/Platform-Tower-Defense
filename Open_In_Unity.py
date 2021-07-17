@@ -419,7 +419,7 @@ if __name__ == "__main__":
 
     # Print message if there are un-committed changes
     if active_local_changes():
-        LOGGER.info_msg(f"Project directory has local changes that have not been committed")
+        LOGGER.info_msg(f"There are unstaged changes in the project directory")
 
     # Pull down latest changes from remote
     LOGGER.info_msg(f"Downloading latest changes from '{REMOTE_BRANCH_NAME}'...")
@@ -429,7 +429,7 @@ if __name__ == "__main__":
     LOGGER.info_msg(f"Attempting to pull latest changes into local branch '{LOCAL_BRANCH_NAME}'...")
     if get_branch_latest_commit_id(LOCAL_BRANCH_NAME) not in get_branch_commit_id_list(
             REMOTE_BRANCH_NAME) or active_local_changes():
-        LOGGER.info_msg("Theres a good chance the pull will require manual review and / or merging, be prepared")
+        LOGGER.info_msg("Theres a chance this pull will require manual review and / or merging, be prepared")
     execute_git_command(["pull"])
 
     # Check if we need to push local commits to remote
