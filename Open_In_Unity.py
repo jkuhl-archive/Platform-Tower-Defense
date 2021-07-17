@@ -178,7 +178,7 @@ def execute_git_command(command_args):
         LOGGER.info_msg(f"git {' '.join(command_args)}: {line.decode().strip()}")
 
     for line in cmd_process.stderr.readlines():
-        LOGGER.error_msg(f"git {' '.join(command_args)}: {line.decode().strip()}")
+        LOGGER.info_msg(f"git {' '.join(command_args)}: {line.decode().strip()}")
 
     if cmd_process.returncode:
         LOGGER.fatal_msg(f"'{' '.join(cmd)}' returned a non-zero exit code: {cmd_process.returncode}")
