@@ -15,7 +15,8 @@ SUPPORTED_PLATFORMS = ["Linux"]
 LOCAL_BRANCH_NAME = "master"
 REMOTE_BRANCH_NAME = f"origin/{LOCAL_BRANCH_NAME}"
 PROJECT_VERSION_FILE = os.path.join("ProjectSettings", "ProjectVersion.txt")
-UNITY_EDITOR_PATH = os.path.join(os.path.expanduser("~"), ".local", "share", "unity-editor")
+UNITY_EDITOR_PATHS = [os.path.join(os.path.expanduser("~"), ".local", "share", "unity-editor"),
+                      os.path.join(os.path.expanduser("~"), "Unity", "Hub", "Editor")]
 
 GIT_EXEC_PATH = ""
 PROJECT_DIRECTORY = ""
@@ -175,10 +176,10 @@ def execute_git_command(command_args):
     cmd_process = subprocess.Popen(cmd, cwd=PROJECT_DIRECTORY, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     for line in cmd_process.stdout.readlines():
-        LOGGER.info_msg(f"git {' '.join(command_args)}: {line.decode().strip()}")
+        LOGGER.info_msg(f"git {' '.join(command_args)}:\t{line.decode().strip()}")
 
     for line in cmd_process.stderr.readlines():
-        LOGGER.info_msg(f"git {' '.join(command_args)}: {line.decode().strip()}")
+        LOGGER.info_msg(f"git {' '.join(command_args)}:\t{line.decode().strip()}")
 
     if cmd_process.returncode:
         LOGGER.fatal_msg(f"'{' '.join(cmd)}' returned a non-zero exit code: {cmd_process.returncode}")
@@ -248,10 +249,11 @@ def get_unity_editor_exec(unity_version):
     :return: Path to the Unity Editor exec as a string
     """
 
-    editor_exec = os.path.join(UNITY_EDITOR_PATH, unity_version, "Editor", "Unity")
+    for path in UNITY_EDITOR_PATHS:
+        editor_exec = os.path.join(path, unity_version, "Editor", "Unity")
 
-    if os.path.isfile(editor_exec):
-        return editor_exec
+        if os.path.isfile(editor_exec):
+            return editor_exec
 
     LOGGER.fatal_msg(f"Unable to locate Unity Editor installation for project's Unity version '{unity_version}'",
                      exit_code=105)
