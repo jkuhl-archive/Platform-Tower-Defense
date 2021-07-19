@@ -160,10 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8221b501426dd7cebab5ec8d44b343e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rateOfFire: 1
+  attackDamage: 2
+  startingHealth: 10
+  speed: 1
   towerRange: 5
   rotationSpeed: 10
-  ammoDamage: 2
   towerRangeCircleMaterial: {fileID: 2100000, guid: a3c0bf0fcecbfc9979bb30f9a0338da3, type: 2}
   ammoPrefab: {fileID: 7228300690433211953, guid: d1be0410b8896c8dc8f05ee00aeba5a8, type: 3}
   towerFireSoundEffect: {fileID: 8300000, guid: 348aef54cffffc97da9d6a43f3b98cc2, type: 3}

@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreepLogic : MonoBehaviour
+public class CreepLogic : BoardPiece
 {
     // Public creep behavior variables
-    public int creepStartingHealth;
-    public int creepDamageDealt;
     public int rewardAmount;
-    public float movementSpeed;
     public float despawnTime;
     public AudioClip creepDamageSoundEffect;
     public AudioClip creepDeathSoundEffect;
@@ -23,9 +20,10 @@ public class CreepLogic : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        currentCreepHealth = creepStartingHealth;
+        base.Start();
+        currentCreepHealth = startingHealth;
         animator = GetComponent<Animator>();
         
         nodeList = GameUtils.GetRootGameObjectByName("Map").GetComponent<MapLogic>().nodeList;
@@ -55,7 +53,7 @@ public class CreepLogic : MonoBehaviour
             Vector3 newPosition = new Vector3(nodeTransform.position.x, transform.position.y, nodeTransform.position.z);
             
             transform.position = Vector3.MoveTowards(transform.position,
-                newPosition, Time.deltaTime * movementSpeed);
+                newPosition, Time.deltaTime * speed);
 
             if (Vector3.Distance(transform.position, newPosition) < 0.1f)
             {
@@ -80,7 +78,7 @@ public class CreepLogic : MonoBehaviour
     {
         isMoving = false;
         animator.SetBool("Victory", true);
-        GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>().UpdatePlayerHealth(-creepDamageDealt);
+        GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>().UpdatePlayerHealth(-attackDamage);
         GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().creepList.Remove(gameObject);
         Destroy(gameObject, (float)(despawnTime * 0.1));
     }
@@ -90,24 +88,15 @@ public class CreepLogic : MonoBehaviour
     /// </summary>
     /// <param name="damageAmount"> Amount of points of damage the creep is receiving </param>
     /// <param name="damagingTower"> Tower GameObject that dealt the damage to this creep </param>
-    public void TakeDamage(int damageAmount, GameObject damagingTower)
+
+    public override void Death(BoardPiece attacker)
     {
-        currentCreepHealth -= damageAmount;
-
-        if (currentCreepHealth <= 0)
-        {
-            isMoving = false;
-            animator.SetBool("Death", true);
-            GetComponent<AudioSource>().PlayOneShot(creepDeathSoundEffect);
-            GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>().UpdatePlayerMoney(rewardAmount);
-            damagingTower.GetComponent<TowerLogic>().creepKillCounter += 1;
-            GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().creepList.Remove(gameObject);
-            Destroy(gameObject, despawnTime);
-        }
-        else
-        {
-            GetComponent<AudioSource>().PlayOneShot(creepDamageSoundEffect);
-
-        }
+        base.Death(attacker);
+        isMoving = false;
+        animator.SetBool("Death", true);
+        GetComponent<AudioSource>().PlayOneShot(creepDeathSoundEffect);
+        GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>().UpdatePlayerMoney(rewardAmount);
+        GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().creepList.Remove(gameObject);
+        Destroy(gameObject, despawnTime);
     }
 }

@@ -10,7 +10,7 @@ public class AmmoLogic : MonoBehaviour
     // Ammo behavior variables
     private bool isInitialized = false;
     private GameObject targetCreep;
-    private GameObject spawnTower;
+    private BoardPiece spawnTower;
     private int ammoDamage;
     
     // Start is called before the first frame update
@@ -40,7 +40,6 @@ public class AmmoLogic : MonoBehaviour
         if (Vector3.Distance(transform.position, targetCreep.transform.position) < ammoTriggerRange)
         {
             targetCreep.GetComponent<CreepLogic>().TakeDamage(ammoDamage, spawnTower);
-
             if (ammoHitPrefab != null)
             {
                 GameObject ammoHit = Instantiate(ammoHitPrefab, transform.position, ammoHitPrefab.transform.rotation);
@@ -56,11 +55,11 @@ public class AmmoLogic : MonoBehaviour
     /// </summary>
     /// <param name="spawnTower"> Tower GameObject that generated the ammo GameObject </param>
     /// <param name="targetCreep"> Creep GameObject that the ammo being shot towards </param>
-    public void InitializeAmmo(GameObject spawnTower, GameObject targetCreep)
+    public void InitializeAmmo(BoardPiece spawnTower, GameObject targetCreep)
     {
         this.spawnTower = spawnTower;
         this.targetCreep = targetCreep;
-        ammoDamage = spawnTower.GetComponent<TowerLogic>().ammoDamage;
+        ammoDamage = spawnTower.attackDamage;
         isInitialized = true;
     }
 }

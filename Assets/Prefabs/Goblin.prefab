@@ -818,10 +818,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd60d166733af9db2fc9cacd36752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creepStartingHealth: 6
-  creepDamageDealt: 1
+  attackDamage: 1
+  startingHealth: 3
+  health: 0
+  speed: 5
   rewardAmount: 10
-  movementSpeed: 4
   despawnTime: 2.5
   creepDamageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
   creepDeathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}

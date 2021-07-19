@@ -1,14 +1,13 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class TowerLogic : MonoBehaviour
+public class TowerLogic : BoardPiece
 {
     // Public tower behavior variables
-    public float rateOfFire;
     public float towerRange;
     public float rotationSpeed;
-    public int ammoDamage;
-    
+
     // Tower range highlight material and ammo prefab GameObject
     public Material towerRangeCircleMaterial;
     public GameObject ammoPrefab;
@@ -24,8 +23,9 @@ public class TowerLogic : MonoBehaviour
     private float nextFireTime;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         InitializeAmmoSpawnPoint();
         InitializeTowerRangeCircle();
     }
@@ -125,12 +125,17 @@ public class TowerLogic : MonoBehaviour
     {
         if (Time.time > nextFireTime)
         {
-            nextFireTime = Time.time + rateOfFire;
+            nextFireTime = Time.time + speed;
                 
             GameObject newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint.transform.position, ammoPrefab.transform.rotation);
-            newAmmo.GetComponent<AmmoLogic>().InitializeAmmo(gameObject, targetCreep);
+            newAmmo.GetComponent<AmmoLogic>().InitializeAmmo(this, targetCreep);
             GetComponent<AudioSource>().PlayOneShot(towerFireSoundEffect);
         }
+    }
+
+    void Killed(GameObject victim)
+    {
+        creepKillCounter += 1;
     }
 
     /// <summary>
