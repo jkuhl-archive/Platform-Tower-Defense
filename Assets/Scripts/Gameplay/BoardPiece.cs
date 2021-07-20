@@ -30,7 +30,7 @@ namespace Gameplay
         public void TakeDamage(int damageAmount, BoardPiece attacker)
         {
             currentHealth -= damageAmount;
-            print(currentHealth);
+            
             if (currentHealth <= 0)
             {
                 Death(attacker);

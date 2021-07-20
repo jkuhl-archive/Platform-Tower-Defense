@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Gameplay.Waves;
 using UnityEngine;
 using Utilities;
 
@@ -77,7 +78,7 @@ namespace Gameplay
             isMoving = false;
             animator.SetBool("Victory", true);
             GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>().UpdatePlayerHealth(-attackDamage);
-            GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().creepList.Remove(gameObject);
+            GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveManager>().creepList.Remove(gameObject);
             Destroy(gameObject, (float)(despawnTime * 0.1));
         }
         
@@ -91,7 +92,7 @@ namespace Gameplay
             isMoving = false;
             animator.SetBool("Death", true);
             GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>().UpdatePlayerMoney(rewardAmount);
-            GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().creepList.Remove(gameObject);
+            GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveManager>().creepList.Remove(gameObject);
             Destroy(gameObject, despawnTime);
         }
     }

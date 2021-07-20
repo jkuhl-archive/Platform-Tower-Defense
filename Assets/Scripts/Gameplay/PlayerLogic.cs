@@ -1,3 +1,4 @@
+using Gameplay.Waves;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -52,9 +53,12 @@ namespace Gameplay
         // Update is called once per frame
         void Update()
         {
-            if (IsReady() && GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().IsReady())
+            if (IsReady() && GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveManager>().IsReady())
             {
-                gameActive = true;
+                if (!gameActive)
+                {
+                    gameActive = true;
+                }
             }
             
             if (!IsReady())
@@ -485,15 +489,21 @@ namespace Gameplay
         /// </summary>
         void LoadMap()
         {
-            GameObject mapPrefab = GameUtils.GetSelectedMap();
+            GameObject gameMap = GameUtils.GetRootGameObjectByName("Map");
 
-            if (mapPrefab != null)
+            if (gameMap == null)
             {
-                GameObject gameMap = Instantiate(mapPrefab, mapPrefab.transform.position, mapPrefab.transform.rotation);
-                gameMap.name = "Map";
-                mapLogic = gameMap.GetComponent<MapLogic>();
-                readyToStart = true;
+                GameObject mapPrefab = GameUtils.GetSelectedMap();
+                
+                if (mapPrefab != null)
+                {
+                    gameMap = Instantiate(mapPrefab, mapPrefab.transform.position, mapPrefab.transform.rotation);
+                    gameMap.name = "Map";
+                }
             }
+            
+            mapLogic = gameMap.GetComponent<MapLogic>();
+            readyToStart = true;
         }
 
         /// <summary>

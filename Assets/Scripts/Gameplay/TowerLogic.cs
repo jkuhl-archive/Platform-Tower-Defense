@@ -1,4 +1,5 @@
 using System;
+using Gameplay.Waves;
 using UnityEngine;
 using Utilities;
 
@@ -41,7 +42,7 @@ namespace Gameplay
         {
             Vector3 towerPosition = new Vector3(transform.position.x, 0, transform.position.z);
         
-            foreach (var creep in GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveLogic>().creepList)
+            foreach (var creep in GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveManager>().creepList)
             {
                 Vector3 creepPosition = new Vector3(creep.transform.position.x, 0, creep.transform.position.z);
 
