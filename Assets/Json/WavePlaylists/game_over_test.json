@@ -1,0 +1,425 @@
+{
+  "timeBetweenWaves": 1,
+  "waveDataList": [
+    {
+      "waveMessage": "Oh lawd he comin",
+      "waveReward": 1000,
+      "waveSpawns": [
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 15.0
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        }
+      ]
+    },
+    {
+      "waveMessage": "Not again...",
+      "waveReward": 1000,
+      "waveSpawns": [
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        },
+        {
+          "creepName": "FastGrunt",
+          "timeBeforeNextSpawn": 0.2
+        }
+      ]
+    }
+  ]
+}

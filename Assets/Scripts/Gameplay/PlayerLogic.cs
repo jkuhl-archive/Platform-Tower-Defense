@@ -33,6 +33,7 @@ namespace Gameplay
         private int currentPlayerMoney;
         private int currentPlayerHealth;
         private bool readyToStart;
+        private bool gameStarted;
         private bool gameActive;
 
         // Gameplay GameObjects
@@ -53,20 +54,21 @@ namespace Gameplay
         // Update is called once per frame
         void Update()
         {
-            if (IsReady() && GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveManager>().IsReady())
+            // Start game if we are ready
+            if (IsReady() && GameUtils.GetRootGameObjectByName("GameLogic").GetComponent<WaveManager>().IsReady() && !gameStarted)
             {
-                if (!gameActive)
-                {
-                    gameActive = true;
-                }
+                gameStarted = true;
+                gameActive = true;
             }
             
+            // If we aren't ready load the game map
             if (!IsReady())
             {
                 LoadMap();
                 return;
             }
             
+            // Core gameplay loop
             if (gameActive)
             {
                 UpdateSelectedObject();
@@ -324,24 +326,6 @@ namespace Gameplay
             {
                 buyCannonTowerButton.GetComponentInChildren<Text>().text = buyCannonTowerString;
             }
-        
-            // Attempt to update money count text
-            string moneyString = $"Money: ${currentPlayerMoney}";
-            if (moneyCounterText.GetComponent<Text>().text != moneyString)
-            {
-                moneyCounterText.GetComponent<Text>().text = moneyString;
-            }
-
-            // Attempt to update health count text, also displays game over message when game is not active
-            string healthString = $"Health: {currentPlayerHealth} / {playerStartingHealth}";
-            if (!gameActive)
-            {
-                healthString = "Game Over!";
-            }
-            if (healthCounterText.GetComponent<Text>().text != healthString)
-            {
-                healthCounterText.GetComponent<Text>().text = healthString;
-            }
 
             // Attempt to update platform count text
             string platformsString = $"Platforms: {mapLogic.platformList.Count} / {mapLogic.maxPlatformCount}";
@@ -528,6 +512,13 @@ namespace Gameplay
                 {
                     Debug.Log("You're bankrupt?");
                 }
+                
+                // Attempt to update money count text
+                string moneyString = $"Money: ${currentPlayerMoney}";
+                if (moneyCounterText.GetComponent<Text>().text != moneyString)
+                {
+                    moneyCounterText.GetComponent<Text>().text = moneyString;
+                }
             }
         }
     
@@ -543,9 +534,20 @@ namespace Gameplay
 
                 if (currentPlayerHealth <= 0)
                 {
+                    currentPlayerHealth = 0;
                     Debug.Log("Game Over!");
                     gameActive = false;
-                    UpdateTextObjects();
+                }
+                
+                // Attempt to update health count text, also displays game over message when game is not active
+                string healthString = $"Health: {currentPlayerHealth} / {playerStartingHealth}";
+                if (currentPlayerHealth == 0)
+                {
+                    healthString = "Game Over!";
+                }
+                if (healthCounterText.GetComponent<Text>().text != healthString)
+                {
+                    healthCounterText.GetComponent<Text>().text = healthString;
                 }
             }
         }

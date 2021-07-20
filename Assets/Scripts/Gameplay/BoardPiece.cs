@@ -16,10 +16,12 @@ namespace Gameplay
         public AudioClip deathSoundEffect;
 
         private float currentHealth;
+        private bool isAlive;
 
         public virtual void Start()
         {
             currentHealth = startingHealth;
+            isAlive = true;
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace Gameplay
         {
             currentHealth -= damageAmount;
             
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 && isAlive)
             {
                 Death(attacker);
             }
@@ -50,6 +52,8 @@ namespace Gameplay
         /// <param name="attacker"> BoardPiece that killed this BoardPiece </param>
         public virtual void Death(BoardPiece attacker)
         {
+            isAlive = false;
+            
             if (PlayerDataUtils.IsSoundEnabled())
             {
                 GetComponent<AudioSource>().PlayOneShot(deathSoundEffect);

@@ -2,9 +2,29 @@
     "timeBetweenWaves": 10,
     "waveDataList": [
         {
-            "waveMessage": "Easy start",
-            "waveReward": 50,
+            "waveMessage": "10 easy grunts",
+            "waveReward": 20,
             "waveSpawns": [
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
                 {
                     "creepName": "Grunt",
                     "timeBeforeNextSpawn": 1.5
@@ -28,9 +48,29 @@
             ]
         },
         {
-            "waveMessage": "Another easy one",
-            "waveReward": 50,
+            "waveMessage": "Another 10 grunts coming up",
+            "waveReward": 20,
             "waveSpawns": [
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
                 {
                     "creepName": "Grunt",
                     "timeBeforeNextSpawn": 1.5
@@ -55,8 +95,24 @@
         },
         {
             "waveMessage": "We got a big one!",
-            "waveReward": 100,
+            "waveReward": 30,
             "waveSpawns": [
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
                 {
                     "creepName": "Grunt",
                     "timeBeforeNextSpawn": 1.5
@@ -85,14 +141,14 @@
         },
         {
             "waveMessage": "Gotta go fast!",
-            "waveReward": 100,
+            "waveReward": 25,
             "waveSpawns": [
                 {
                     "creepName": "FastGrunt",
                     "timeBeforeNextSpawn": 1.5
                 },
                 {
-                    "creepName": "Grunt",
+                    "creepName": "FastGrunt",
                     "timeBeforeNextSpawn": 1.5
                 },
                 {
@@ -100,7 +156,27 @@
                     "timeBeforeNextSpawn": 1.5
                 },
                 {
-                    "creepName": "Grunt",
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
                     "timeBeforeNextSpawn": 1.5
                 },
                 {
@@ -110,20 +186,94 @@
             ]
         },
         {
-            "waveMessage": "Boss rush",
-            "waveReward": 100,
+            "waveMessage": "Boss wave",
+            "waveReward": 50,
             "waveSpawns": [
                 {
-                    "creepName": "TankGrunt",
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
                     "timeBeforeNextSpawn": 1.5
                 },
                 {
                     "creepName": "TankGrunt",
+                    "timeBeforeNextSpawn": 5.0
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
                     "timeBeforeNextSpawn": 1.5
                 },
                 {
                     "creepName": "TankGrunt",
+                    "timeBeforeNextSpawn": 5.0
+                },
+                {
+                    "creepName": "FastGrunt",
                     "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.5
+                },
+                {
+                    "creepName": "TankGrunt",
+                    "timeBeforeNextSpawn": 1.0
+                },
+                {
+                    "creepName": "TankGrunt",
+                    "timeBeforeNextSpawn": 1.0
+                }
+            ]
+        },
+        {
+            "waveMessage": "Picking up the pace",
+            "waveReward": 25,
+            "waveSpawns": [
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 0.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 0.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 0.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 0.5
+                },
+                {
+                    "creepName": "Grunt",
+                    "timeBeforeNextSpawn": 0.5
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.0
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.0
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.0
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.0
+                },
+                {
+                    "creepName": "FastGrunt",
+                    "timeBeforeNextSpawn": 1.0
                 }
             ]
         }

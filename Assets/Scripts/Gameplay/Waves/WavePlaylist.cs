@@ -130,12 +130,25 @@ namespace Gameplay.Waves
             
             if (!waveActive)
             {
-                if (waveDataIndex == 0)
+                int nextWaveCountdown = (int)(nextWaveTime - Time.time);
+                string nextWaveMessage = $"starting in {nextWaveCountdown} seconds";
+
+                if (nextWaveCountdown == 0)
                 {
-                    return $"Game starts in {timeBetweenWaves}...";
+                    return "Wave starting now!";
                 }
                 
-                return $"Next wave starting in {timeBetweenWaves}...";
+                if (nextWaveCountdown == 1)
+                {
+                    nextWaveMessage = $"starting in {nextWaveCountdown} second";
+                }
+                
+                if (waveDataIndex == 0)
+                {
+                    return $"Game {nextWaveMessage}";
+                }
+                
+                return $"Next wave {nextWaveMessage}";
             }
 
             return "";
@@ -147,7 +160,7 @@ namespace Gameplay.Waves
         public void StartSpawning()
         {
             spawningActive = true;
-            nextWaveTime = Time.time + timeBetweenWaves;
+            nextWaveTime = Time.time + timeBetweenWaves + 5;
         }
 
         /// <summary>
