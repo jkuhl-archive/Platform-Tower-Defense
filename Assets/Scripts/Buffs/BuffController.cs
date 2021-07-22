@@ -4,7 +4,7 @@ using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 
-public class BuffLogic : MonoBehaviour
+public class BuffController : MonoBehaviour
 {
     public List<GameObject> buffedObjs;
     // Start is called before the first frame update

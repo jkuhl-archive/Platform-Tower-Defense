@@ -11,9 +11,9 @@ namespace Gameplay
 
         // Ammo behavior variables
         private bool isInitialized = false;
-        private GameObject targetCreep;
-        private BoardPiece spawnTower;
-        private int ammoDamage;
+        protected GameObject targetCreep;
+        protected BoardPiece spawnTower;
+        protected int ammoDamage;
     
         // Start is called before the first frame update
         void Start()
@@ -22,7 +22,7 @@ namespace Gameplay
         }
 
         // Update is called once per frame
-        void Update()
+        protected void Update()
         {
             if (!isInitialized)
             {
@@ -38,19 +38,27 @@ namespace Gameplay
             transform.position = Vector3.MoveTowards(transform.position,
                 targetCreep.transform.position, Time.deltaTime * ammoMovementSpeed);
         
-            // When the ammo hits the target creep, deal damage
+            // When the ammo hits the target creep, process collision
             if (Vector3.Distance(transform.position, targetCreep.transform.position) < ammoTriggerRange)
             {
-                targetCreep.GetComponent<CreepLogic>().TakeDamage(ammoDamage, spawnTower);
-
-                if (ammoHitPrefab != null)
-                {
-                    GameObject ammoHit = Instantiate(ammoHitPrefab, transform.position, ammoHitPrefab.transform.rotation);
-                    Destroy(ammoHit, 3);
-                }
-            
-                Destroy(gameObject);
+                Collide();
             }
+        }
+        
+        /// <summary>
+        /// Define what happens when the bullet collides with the target
+        /// </summary>
+        protected void Collide()
+        {
+            targetCreep.GetComponent<CreepLogic>().TakeDamage(ammoDamage, spawnTower);
+
+            if (ammoHitPrefab != null)
+            {
+                GameObject ammoHit = Instantiate(ammoHitPrefab, transform.position, ammoHitPrefab.transform.rotation);
+                Destroy(ammoHit, 3);
+            }
+            
+            Destroy(gameObject);
         }
 
         /// <summary>

@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Gameplay;
 using UnityEngine;
 
 public class BleedDebuff : Buff
 {
-    // Start is called before the first frame update
-    public BleedDebuff(GameObject target) : base(target)
+    public int bleedDamage;
+    public BleedDebuff(BoardPiece target) : base(target)
     {
         
     }
 
-    public void Effect()
+    protected override void Effect(BoardPiece target)
     {
-        //target.TakeDamage(1);
-        //base.Effect();
+        target.TakeDamage(bleedDamage, null);
     }
 }

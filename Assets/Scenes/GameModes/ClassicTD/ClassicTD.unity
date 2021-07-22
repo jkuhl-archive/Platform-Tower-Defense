@@ -1718,7 +1718,7 @@ MonoBehaviour:
         m_MethodName: BuyTower
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 459275384707645420, guid: b03c366197c0ef5f9bb66b3b3f0e49e1, type: 3}
+          m_ObjectArgument: {fileID: 4123500432601173869, guid: d935d2c9a0fb50e66b0c0e06cc6b90ac, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

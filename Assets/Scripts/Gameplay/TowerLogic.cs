@@ -133,13 +133,17 @@ namespace Gameplay
             if (Time.time > nextFireTime)
             {
                 nextFireTime = Time.time + attackSpeed;
-                
-                GameObject newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint.transform.position, ammoPrefab.transform.rotation);
-                newAmmo.GetComponent<AmmoLogic>().InitializeAmmo(this, targetCreep);
-                if (PlayerDataUtils.IsSoundEnabled())
-                {
-                    GetComponent<AudioSource>().PlayOneShot(towerFireSoundEffect);
-                }
+                Attack(targetCreep);
+            }
+        }
+
+        void Attack(GameObject targetCreep)
+        {
+            GameObject newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint.transform.position, ammoPrefab.transform.rotation);
+            newAmmo.GetComponent<AmmoLogic>().InitializeAmmo(this, targetCreep);
+            if (PlayerDataUtils.IsSoundEnabled())
+            {
+                GetComponent<AudioSource>().PlayOneShot(towerFireSoundEffect);
             }
         }
 
