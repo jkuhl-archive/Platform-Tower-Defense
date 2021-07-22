@@ -25,9 +25,9 @@ namespace Gameplay
         public int creepKillCounter;
 
         // Tower behavior variables
-        private GameObject ammoSpawnPoint;
-        private LineRenderer towerRangeCircle;
-        private float nextFireTime;
+        protected GameObject ammoSpawnPoint;
+        protected LineRenderer towerRangeCircle;
+        protected float nextFireTime;
 
         // Start is called before the first frame update
         public override void Start()
@@ -136,8 +136,12 @@ namespace Gameplay
                 Attack(targetCreep);
             }
         }
-
-        void Attack(GameObject targetCreep)
+        
+        /// <summary>
+        ///  Define What the tower does once it's time to attack
+        /// </summary>
+        /// <param name="targetCreep"></param>
+        protected virtual void Attack(GameObject targetCreep)
         {
             GameObject newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint.transform.position, ammoPrefab.transform.rotation);
             newAmmo.GetComponent<AmmoLogic>().InitializeAmmo(this, targetCreep);

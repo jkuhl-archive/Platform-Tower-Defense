@@ -370,8 +370,12 @@ namespace Gameplay
                 default:
                     towerCost = -1;
                     break;
-            
+                
                 case "CannonTower":
+                    towerCost = buyCannonTowerCost;
+                    break;
+                
+                case "BleedTower":
                     towerCost = buyCannonTowerCost;
                     break;
             }

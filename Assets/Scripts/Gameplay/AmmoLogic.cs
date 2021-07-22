@@ -10,7 +10,7 @@ namespace Gameplay
         public GameObject ammoHitPrefab;
 
         // Ammo behavior variables
-        private bool isInitialized = false;
+        protected bool isInitialized = false;
         protected GameObject targetCreep;
         protected BoardPiece spawnTower;
         protected int ammoDamage;
@@ -31,7 +31,7 @@ namespace Gameplay
 
             if (targetCreep == null)
             {
-                Destroy(gameObject);
+                Explode();
             }
         
             // Move ammo towards target creep
@@ -48,17 +48,22 @@ namespace Gameplay
         /// <summary>
         /// Define what happens when the bullet collides with the target
         /// </summary>
-        protected void Collide()
+        protected virtual void Collide()
         {
             targetCreep.GetComponent<CreepLogic>().TakeDamage(ammoDamage, spawnTower);
 
             if (ammoHitPrefab != null)
             {
-                GameObject ammoHit = Instantiate(ammoHitPrefab, transform.position, ammoHitPrefab.transform.rotation);
-                Destroy(ammoHit, 3);
+                Explode();
             }
-            
+                
             Destroy(gameObject);
+        }
+
+        void Explode()
+        {
+            GameObject ammoHit = Instantiate(ammoHitPrefab, transform.position, ammoHitPrefab.transform.rotation);
+            Destroy(ammoHit, 3);
         }
 
         /// <summary>

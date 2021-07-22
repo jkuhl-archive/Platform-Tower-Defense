@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db91903e7a6c7625962f96c976d1b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoMovementSpeed: 0
-  ammoTriggerRange: 0
-  ammoHitPrefab: {fileID: 0}
+  ammoMovementSpeed: 15
+  ammoTriggerRange: 0.1
+  ammoHitPrefab: {fileID: 5199365563368703699, guid: 6fd8e00ede45b7ad19fcbf0e3d98237d, type: 3}
 --- !u!1001 &6966369707861157840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,6 +69,10 @@ PrefabInstance:
     - target: {fileID: 359603495308909025, guid: ac6d8eefef5be475db4197ebbb9e865b, type: 3}
       propertyPath: m_Name
       value: BleedAmmo
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099485583590475311, guid: ac6d8eefef5be475db4197ebbb9e865b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac6d8eefef5be475db4197ebbb9e865b, type: 3}

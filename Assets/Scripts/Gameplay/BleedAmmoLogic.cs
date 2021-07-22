@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Gameplay;
 using UnityEngine;
 
-public class BleedAmmoLogic : AmmoLogic
+namespace Gameplay
 {
     /// <summary>
     /// Define what happens when the bullet collides with the target
     /// </summary>
-
-    new void Collide()
+    public class BleedAmmoLogic : AmmoLogic
     {
-        base.Collide();
-        Debug.Log("IM WATCHING GAY PORNO!!!");
+        protected override void Collide()
+        {
+            base.Collide();
+            Debug.Log("Ouch I'm bleeding!");
+        }
     }
 }
