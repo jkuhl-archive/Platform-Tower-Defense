@@ -1945,7 +1945,6 @@ MonoBehaviour:
   - {fileID: 1709587549}
   - {fileID: 441064206}
   - {fileID: 234381613}
-  villageMapPrefab: {fileID: 2651800936223182364, guid: 234f092ae54547e4bbde022da240bd26, type: 3}
   buttonClickSoundEffect: {fileID: 8300000, guid: 0c8a77c68af74fd928185c51fd3c86dd, type: 3}
 --- !u!4 &445434493
 Transform:

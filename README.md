@@ -11,5 +11,8 @@ Tower Defense style game developed in Unity
 ~/Unity-Projects/Platform-Tower-Defense/Open_In_Unity.py
 ```
 
+# Coding Conventions
+[Click Here](Docs/Coding_Conventions.md)
+
 # Development Environment Setup
-[Click Here](Dev_Env_Setup.md)
+[Click Here](Docs/Dev_Env_Setup.md)
