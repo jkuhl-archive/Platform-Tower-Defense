@@ -10,17 +10,18 @@ namespace Menus
     {
         [Header("Main Menu Text GameObjects")]
         [SerializeField] private GameObject gameTitleText;
+
         [SerializeField] private GameObject developerNameText;
         [SerializeField] private GameObject gameVersionText;
+
+        [Header("Settings Menu GameObjects")]
+        [SerializeField] private GameObject resolutionSelectDropdown;
 
         [Header("Menu Page Canvas GameObjects")]
         [SerializeField] private List<GameObject> menuPageCanvasList;
 
         [Header("Menu Sound Effects")]
         [SerializeField] private AudioClip buttonClickSoundEffect;
-
-        // Menu state variables
-        private MainMenuState currentMenuState = MainMenuState.Null;
         
         /// <summary>
         ///     Enum for storing possible main menu states
@@ -34,18 +35,23 @@ namespace Menus
             Null
         }
 
+        // Menu state variables
+        private MainMenuState currentMenuState = MainMenuState.Null;
+
         // Start is called before the first frame update
         private void Start()
         {
             // Initialize menu
-            InitializeMenuTextObjects();
+            InitializeGameInfoTextObjects();
+            InitializeSettingsMenuObjects();
             ChangeMenuState(MainMenuState.Main);
 
             // Set saved player preferences
             GameUtils.GetRootGameObjectByName("BackgroundMusic").SetActive(
-                PlayerPrefsUtils.GetBool(PlayerPrefsConstants.KeySoundEnabled, PlayerPrefsConstants.DefaultSoundEnabled));
+                PlayerPrefsUtils.GetBool(PlayerPrefsConstants.KeySoundEnabled,
+                    PlayerPrefsConstants.DefaultSoundEnabled));
         }
-        
+
         /// <summary>
         ///     Switches the active menu page
         /// </summary>
@@ -74,7 +80,7 @@ namespace Menus
         /// <summary>
         ///     Loads application name, developer, and version from Unity's build settings and sets their values in the UI
         /// </summary>
-        private void InitializeMenuTextObjects()
+        private void InitializeGameInfoTextObjects()
         {
             gameTitleText.GetComponent<Text>().text = Application.productName;
             developerNameText.GetComponent<Text>().text = $"(C) {Application.companyName}";
@@ -85,9 +91,24 @@ namespace Menus
             gameVersionText.GetComponent<Text>().text = $"{versionString}\n" +
                                                         $"Unity Version {Application.unityVersion}";
         }
-        
+
         /// <summary>
-        /// Attempts to store the selected map's prefabs in the buffer and then start the game
+        ///     Initializes objects in the settings menu such as the resolution drop down menu
+        /// </summary>
+        private void InitializeSettingsMenuObjects()
+        {
+            // Populate screen resolution drop down menu
+            var resolutionList = resolutionSelectDropdown.GetComponent<Dropdown>().options;
+            foreach (var pair in SupportedResolutions.AvailableResolutions)
+                resolutionList.Add(new Dropdown.OptionData(pair.Value.ToString()));
+
+            // TODO: Fix issue with getting refresh rates so we don't have to hard code 60 here
+            var resolutionKey = SupportedResolutions.GetResolutionKey(Screen.height, Screen.width, 60);
+            resolutionSelectDropdown.GetComponent<Dropdown>().value = resolutionKey;
+        }
+
+        /// <summary>
+        ///     Attempts to store the selected map's prefabs in the buffer and then start the game
         /// </summary>
         /// <param name="mapName"> Name of the selected map </param>
         private void SelectGameMap(string mapName)
@@ -96,9 +117,9 @@ namespace Menus
 
             if (success) StartGame();
         }
-        
+
         /// <summary>
-        /// Attempts to store the selected game mode's prefabs in the buffer and then switch to the map select menu
+        ///     Attempts to store the selected game mode's prefabs in the buffer and then switch to the map select menu
         /// </summary>
         /// <param name="gameModeName"> Name of the selected game mode </param>
         private void SelectGameMode(string gameModeName)
@@ -107,7 +128,7 @@ namespace Menus
 
             if (success) ChangeMenuState(MainMenuState.MapSelect);
         }
-        
+
         /// <summary>
         ///     Attempts to leave the menu and start gameplay
         /// </summary>
@@ -167,6 +188,15 @@ namespace Menus
                     SelectGameMap("Village");
                     break;
             }
+        }
+
+        /// <summary>
+        ///     Handles interactions with the resolution selection drop down menu in the settings menu
+        /// </summary>
+        /// <param name="selectedResolution"> Dropdown object returned by the UI when interacted with </param>
+        public void ResolutionSelectHandler(Dropdown selectedResolution)
+        {
+            GameSettingsUtils.SetGameResolution(selectedResolution.value);
         }
     }
 }
