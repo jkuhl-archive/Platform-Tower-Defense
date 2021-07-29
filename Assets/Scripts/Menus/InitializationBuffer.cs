@@ -140,11 +140,11 @@ namespace Menus
         /// <returns> True if able to store selected maps's prefabs, false if not </returns>
         public static bool SelectGameMap(string mapName)
         {
-            var mapDirectory = Path.Combine(MapsDirectory, mapName);
-            var backgroundMusicPrefabPath = Path.Combine(mapDirectory, "BackgroundMusic");
-            var lightingPrefabPath = Path.Combine(mapDirectory, "Lighting");
-            var mainCameraPrefabPath = Path.Combine(mapDirectory, "MainCamera");
-            var mapPrefabPath = Path.Combine(mapDirectory, "Map");
+            string mapDirectory = Path.Combine(MapsDirectory, mapName);
+            string backgroundMusicPrefabPath = Path.Combine(mapDirectory, "BackgroundMusic");
+            string lightingPrefabPath = Path.Combine(mapDirectory, "Lighting");
+            string mainCameraPrefabPath = Path.Combine(mapDirectory, "MainCamera");
+            string mapPrefabPath = Path.Combine(mapDirectory, "Map");
 
             Debug.Log($"Selected game map: '{mapName}'");
 
@@ -153,8 +153,8 @@ namespace Menus
                 // Load background music prefab
                 if (GameUtils.ResourceFileExists(backgroundMusicPrefabPath, "prefab"))
                 {
-                    var backgroundMusicPrefab = Resources.Load<GameObject>(backgroundMusicPrefabPath);
-                    var success = SetBackgroundMusic(backgroundMusicPrefab);
+                    GameObject backgroundMusicPrefab = Resources.Load<GameObject>(backgroundMusicPrefabPath);
+                    bool success = SetBackgroundMusic(backgroundMusicPrefab);
 
                     if (!success)
                     {
@@ -172,8 +172,8 @@ namespace Menus
                 // Load lighting prefab
                 if (GameUtils.ResourceFileExists(lightingPrefabPath, "prefab"))
                 {
-                    var lightingPrefab = Resources.Load<GameObject>(lightingPrefabPath);
-                    var success = SetLighting(lightingPrefab);
+                    GameObject lightingPrefab = Resources.Load<GameObject>(lightingPrefabPath);
+                    bool success = SetLighting(lightingPrefab);
 
                     if (!success)
                     {
@@ -190,8 +190,8 @@ namespace Menus
                 // Load main camera prefab
                 if (GameUtils.ResourceFileExists(mainCameraPrefabPath, "prefab"))
                 {
-                    var mainCameraPrefab = Resources.Load<GameObject>(mainCameraPrefabPath);
-                    var success = SetMainCamera(mainCameraPrefab);
+                    GameObject mainCameraPrefab = Resources.Load<GameObject>(mainCameraPrefabPath);
+                    bool success = SetMainCamera(mainCameraPrefab);
 
                     if (!success)
                     {
@@ -208,8 +208,8 @@ namespace Menus
                 // Load map prefab
                 if (GameUtils.ResourceFileExists(mapPrefabPath, "prefab"))
                 {
-                    var mapPrefab = Resources.Load<GameObject>(mapPrefabPath);
-                    var success = SetMap(mapPrefab);
+                    GameObject mapPrefab = Resources.Load<GameObject>(mapPrefabPath);
+                    bool success = SetMap(mapPrefab);
 
                     if (!success)
                     {
@@ -239,9 +239,9 @@ namespace Menus
         /// <returns> True if able to store selected game mode's prefabs, false if not </returns>
         public static bool SelectGameMode(string gameModeName)
         {
-            var gameModeDirectory = Path.Combine(GameModesDirectory, gameModeName);
-            var gameLogicPrefabPath = Path.Combine(gameModeDirectory, "GameLogic");
-            var gameUiPrefabPath = Path.Combine(gameModeDirectory, "GameUI");
+            string gameModeDirectory = Path.Combine(GameModesDirectory, gameModeName);
+            string gameLogicPrefabPath = Path.Combine(gameModeDirectory, "GameLogic");
+            string gameUiPrefabPath = Path.Combine(gameModeDirectory, "GameUI");
 
             Debug.Log($"Selected game mode: '{gameModeName}'");
 
@@ -250,8 +250,8 @@ namespace Menus
                 // Load game logic prefab
                 if (GameUtils.ResourceFileExists(gameLogicPrefabPath, "prefab"))
                 {
-                    var gameLogicPrefab = Resources.Load(Path.Combine(gameModeDirectory, "GameLogic")) as GameObject;
-                    var success = SetGameLogic(gameLogicPrefab);
+                    GameObject gameLogicPrefab = Resources.Load<GameObject>(gameLogicPrefabPath);
+                    bool success = SetGameLogic(gameLogicPrefab);
 
                     if (!success)
                     {
@@ -268,8 +268,8 @@ namespace Menus
                 // Load game UI prefab
                 if (GameUtils.ResourceFileExists(gameUiPrefabPath, "prefab"))
                 {
-                    var gameUiPrefab = Resources.Load<GameObject>(gameUiPrefabPath);
-                    var success = SetGameUI(gameUiPrefab);
+                    GameObject gameUiPrefab = Resources.Load<GameObject>(gameUiPrefabPath);
+                    bool success = SetGameUI(gameUiPrefab);
 
                     if (!success)
                     {

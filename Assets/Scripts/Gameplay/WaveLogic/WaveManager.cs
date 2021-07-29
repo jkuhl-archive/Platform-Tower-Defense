@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Gameplay.WaveLogic
     public class WaveManager : MonoBehaviour
     {
         [Header("WavePlaylist JSON File")]
-        [SerializeField] private string wavePlaylistJson;
+        [SerializeField] private string wavePlaylistName;
 
         [Header("Creep Prefabs")]
         [SerializeField] private GameObject gruntPrefab;
@@ -30,7 +31,7 @@ namespace Gameplay.WaveLogic
         // Start is called before the first frame update
         private void Start()
         {
-            wavePlaylist = WavePlaylist.FromJson(wavePlaylistJson);
+            wavePlaylist = WavePlaylist.FromJson(wavePlaylistName);
             startPoint = GameUtils.GetMapLogic().GetNodeList()[0];
         }
 
@@ -45,6 +46,12 @@ namespace Gameplay.WaveLogic
         /// </summary>
         private void Execute()
         {
+            // Return immediately if no WavePlaylist is loaded
+            if (wavePlaylist == null)
+            {
+                return;
+            }
+
             // Attempt to spawn a creep
             if (wavePlaylist.CanSpawnCreep())
             {
@@ -115,6 +122,11 @@ namespace Gameplay.WaveLogic
         /// <returns> Value of waveDataIndex incremented by 1 to account for list indexes starting with 0 </returns>
         public int GetCurrentWaveNumber()
         {
+            if (wavePlaylist == null)
+            {
+                return 0;
+            }
+            
             return wavePlaylist.GetCurrentWaveNumber();
         }
         
@@ -124,15 +136,26 @@ namespace Gameplay.WaveLogic
         /// <returns> Wave status message as a string </returns>
         public string GetWaveStatusMessage()
         {
+            if (wavePlaylist == null)
+            {
+                return String.Empty;
+            }
+            
             return wavePlaylist.GetWaveStatusMessage();
         }
 
         /// <summary>
         /// Begins 'playing' the playlist and starts spawning creeps
         /// </summary>
-        public void StartSpawning()
+        public bool StartSpawning()
         {
+            if (wavePlaylist == null)
+            {
+                return false;
+            }
+            
             wavePlaylist.StartSpawning();
+            return true;
         }
     }
 }

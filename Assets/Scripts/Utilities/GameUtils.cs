@@ -63,10 +63,12 @@ namespace Utilities
             if (!_gameStarted)
             {
                 Debug.Log("Starting game...");
-                _gameStarted = true;
-                _gameInProgress = true;
-                _gamePaused = false;
-                GetWaveManager().StartSpawning();
+                if (GetWaveManager().StartSpawning())
+                {
+                    _gameStarted = true;
+                    _gameInProgress = true;
+                    _gamePaused = false;
+                }
             }
         }
 
@@ -156,8 +158,14 @@ namespace Utilities
         /// <returns> True if the directory exists, false if not </returns>
         public static bool ResourceDirectoryExists(string resourceDirectoryPath)
         {
-            var directoryPath = Path.Combine(Application.dataPath, "Resources", resourceDirectoryPath);
-            return Directory.Exists(directoryPath);
+            if (Application.isEditor)
+            {
+                var directoryPath = Path.Combine(Application.dataPath, "Resources", resourceDirectoryPath);
+                return Directory.Exists(directoryPath);
+            }
+            
+            // We always return true if not in the editor as we assume the folder exists in production
+            return true;
         }
 
         /// <summary>
@@ -169,8 +177,14 @@ namespace Utilities
         /// <returns> True if the file exists, false if not </returns>
         public static bool ResourceFileExists(string resourceFilePath, string fileExtension)
         {
-            var filePath = Path.Combine(Application.dataPath, "Resources", $"{resourceFilePath}.{fileExtension}");
-            return File.Exists(filePath);
+            if (Application.isEditor)
+            {
+                var filePath = Path.Combine(Application.dataPath, "Resources", $"{resourceFilePath}.{fileExtension}");
+                return File.Exists(filePath);
+            }
+
+            // We always return true if not in the editor as we assume the file exists in production
+            return true;
         }
 
         /// <summary>

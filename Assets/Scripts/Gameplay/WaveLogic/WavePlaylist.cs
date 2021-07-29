@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Utilities;
 
 namespace Gameplay.WaveLogic
 {
@@ -9,7 +10,7 @@ namespace Gameplay.WaveLogic
     public class WavePlaylist
     {
         // WavePlaylist JSON file directory
-        private static readonly string jsonDirectory = Path.Combine(Application.dataPath, "Json", "WavePlaylists");
+        private static readonly string JsonDirectory = Path.Combine("Json", "WavePlaylists");
 
         // WavePlaylist data
         public int timeBetweenWaves;
@@ -146,7 +147,7 @@ namespace Gameplay.WaveLogic
         /// <param name="jsonFileName"> Name of the JSON file we want to write data to, should look like: "test.json" </param>
         public void ToJson(string jsonFileName)
         {
-            var filePath = Path.Combine(jsonDirectory, jsonFileName);
+            var filePath = Path.Combine(Application.dataPath, JsonDirectory, jsonFileName);
 
             Debug.Log($"Writing WavePlaylist data to JSON file: '{filePath}'");
 
@@ -162,12 +163,20 @@ namespace Gameplay.WaveLogic
         /// <returns> WavePlaylist object containing data loaded from the JSON file </returns>
         public static WavePlaylist FromJson(string jsonFileName)
         {
-            var filePath = Path.Combine(jsonDirectory, jsonFileName);
+            var filePath = Path.Combine(JsonDirectory, jsonFileName);
 
-            Debug.Log($"Loading WavePlaylist data from JSON file: '{filePath}'");
-
-            if (File.Exists(filePath)) return JsonUtility.FromJson<WavePlaylist>(File.ReadAllText(filePath));
-
+            if (GameUtils.ResourceFileExists(filePath, "json"))
+            {
+                Debug.Log($"Loading WavePlaylist data from JSON file: '{filePath}'");
+                var jsonText = Resources.Load<TextAsset>(filePath);
+                return JsonUtility.FromJson<WavePlaylist>(jsonText.ToString());
+            }
+            else
+            {
+                Debug.Log($"WavePlaylist JSON file does not exist: '{filePath}'");
+            }
+            
+            Debug.Log($"Failed to load WavePlaylist from JSON file: '{filePath}'");
             return null;
         }
     }

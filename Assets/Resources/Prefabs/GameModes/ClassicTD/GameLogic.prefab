@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb5a833010ce21c4b3933974b2007d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePlaylistJson: test1.json
+  wavePlaylistName: test1
   gruntPrefab: {fileID: 3729896304444588828, guid: b3e43f6a76ae2aa9f8a5b515bc2df582, type: 3}
   fastGruntPrefab: {fileID: 342657181421073587, guid: 6507a968457b99c55a6cee0da2a2722f, type: 3}
   tankGruntPrefab: {fileID: 3920149986052969328, guid: f3ff0e65f63afac2f8366b97ffb06c6b, type: 3}
