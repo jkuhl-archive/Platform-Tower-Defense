@@ -20,6 +20,9 @@ namespace Menus
         [SerializeField] private GameObject loadingScreenCanvas;
         [SerializeField] private GameObject loadingProgressBar;
 
+        [Header("Terminal Prefab GameObject")]
+        [SerializeField] private GameObject terminalObjectPrefab;
+
         [Header("Load Main Menu Toggle")]
         [SerializeField] private bool loadMainMenuOnStart;
 
@@ -35,9 +38,15 @@ namespace Menus
             // destroy it if another is already registered
             var success = GameUtils.SetGameLoadingObject(gameObject);
             if (!success) Destroy(gameObject);
+            
+            // Instantiate the TerminalObject
+            GameObject terminalObject = Instantiate(terminalObjectPrefab, terminalObjectPrefab.transform.position,
+                terminalObjectPrefab.transform.rotation);
+            terminalObject.name = terminalObjectPrefab.name;
 
-            // Prevent GameLoadingObject from being destroyed when a new scene is loaded
+            // Prevent GameLoadingObject and TerminalObject from being destroyed when a new scene is loaded
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(terminalObject);
 
             isLoading = false;
 

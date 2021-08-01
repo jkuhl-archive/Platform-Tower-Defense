@@ -566,6 +566,7 @@ MonoBehaviour:
   loadingUiCanvasGroup: {fileID: 8178552255223918403}
   loadingScreenCanvas: {fileID: 2268164021603567710}
   loadingProgressBar: {fileID: 3646341825793671331}
+  terminalObjectPrefab: {fileID: 2067344201481183492, guid: a419039213a16220d8c19dd4422accf4, type: 3}
   loadMainMenuOnStart: 1
   debugGameplay: 0
   debugGameModeName: 

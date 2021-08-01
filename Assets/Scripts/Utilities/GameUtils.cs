@@ -2,6 +2,7 @@ using System.IO;
 using Gameplay;
 using Gameplay.WaveLogic;
 using Menus;
+using Terminal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,8 +15,9 @@ namespace Utilities
         private static bool _gameInProgress;
         private static bool _gamePaused;
 
-        // Static location for storing a reference to the GameLoadingObject GameObject
+        // Static location for storing a reference to objects that are never destroyed
         private static GameObject _gameLoadingObject;
+        private static GameObject _terminalObject;
 
         /// <summary>
         ///     Exits the application
@@ -123,6 +125,15 @@ namespace Utilities
         {
             return GetRootGameObjectByName("GameLogic").GetComponent<PlayerLogic>();
         }
+        
+        /// <summary>
+        ///     Gets the TerminalLogic object
+        /// </summary>
+        /// <returns> TerminalLogic object or null if it could not be found </returns>
+        public static TerminalLogic GetTerminalLogic()
+        {
+            return _terminalObject.GetComponent<TerminalLogic>();
+        }
 
         /// <summary>
         ///     Gets the WaveManager object from the current scene
@@ -197,6 +208,22 @@ namespace Utilities
             if (_gameLoadingObject == null)
             {
                 _gameLoadingObject = gameLoadingObject;
+                return true;
+            }
+
+            return false;
+        }
+        
+        /// <summary>
+        ///     Stores a static reference to the TerminalObject
+        /// </summary>
+        /// <param name="terminalObject"> TerminalObject GameObject </param>
+        /// <returns> True if able to store, false if not. Returns false if a TerminalObject has already been stored. </returns>
+        public static bool SetTerminalObject(GameObject terminalObject)
+        {
+            if (_terminalObject == null)
+            {
+                _terminalObject = terminalObject;
                 return true;
             }
 
