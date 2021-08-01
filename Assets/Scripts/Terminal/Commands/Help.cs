@@ -5,8 +5,8 @@ namespace Terminal.Commands
 {
     public class Help : ITerminalCommand
     {
-        private const string Description = "Displays all available commands and their help information";
-        private const string UsageInfo = "help";
+        private const string Description = "Displays all available commands";
+        private const string UsageSyntax = "help";
 
         private readonly List<string> commandAliases = new List<string>
         {
@@ -23,11 +23,11 @@ namespace Terminal.Commands
             var terminalLogic = GameUtils.GetTerminalLogic();
 
             terminalLogic.WriteToTerminalOutput(TerminalOutputType.Header,
-                GetFormattedString("Command Name", "Usage Info", "Description"));
+                GetFormattedString("Command Name", "Usage Syntax", "Description"));
 
             foreach (var command in terminalLogic.GetAvailableCommands())
             {
-                var info = GetFormattedString(command.GetCommandAliases()[0], command.GetUsageInfo(),
+                var info = GetFormattedString(command.GetCommandAliases()[0], command.GetUsageSyntax(),
                     command.GetDescription());
                 terminalLogic.WriteToTerminalOutput(TerminalOutputType.Info, info);
             }
@@ -55,9 +55,9 @@ namespace Terminal.Commands
         ///     Gets the usage syntax info for the command
         /// </summary>
         /// <returns> String containing usage syntax information for the command </returns>
-        public string GetUsageInfo()
+        public string GetUsageSyntax()
         {
-            return UsageInfo;
+            return UsageSyntax;
         }
 
         /// <summary>

@@ -29,6 +29,6 @@ namespace Terminal
         ///     Example "givemoney 100"
         /// </summary>
         /// <returns> String containing usage syntax information for the command </returns>
-        string GetUsageInfo();
+        string GetUsageSyntax();
     }
 }

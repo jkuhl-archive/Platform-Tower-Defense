@@ -5,8 +5,8 @@ namespace Terminal.Commands
 {
     public class Exit : ITerminalCommand
     {
-        private const string Description = "Closes the terminal and returns to the game";
-        private const string UsageInfo = "exit";
+        private const string Description = "Closes the terminal";
+        private const string UsageSyntax = "exit";
 
         private readonly List<string> commandAliases = new List<string>
         {
@@ -45,9 +45,9 @@ namespace Terminal.Commands
         ///     Gets the usage syntax info for the command
         /// </summary>
         /// <returns> String containing usage syntax information for the command </returns>
-        public string GetUsageInfo()
+        public string GetUsageSyntax()
         {
-            return UsageInfo;
+            return UsageSyntax;
         }
     }
 }

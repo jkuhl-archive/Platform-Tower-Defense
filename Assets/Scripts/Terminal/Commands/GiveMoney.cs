@@ -6,7 +6,7 @@ namespace Terminal.Commands
     public class GiveMoney : ITerminalCommand
     {
         private const string Description = "Gives the player the given amount of money";
-        private const string UsageInfo = "givemoney 100";
+        private const string UsageSyntax = "givemoney 100";
 
         private readonly List<string> commandAliases = new List<string>
         {
@@ -30,7 +30,7 @@ namespace Terminal.Commands
                     if (!success)
                     {
                         GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Error,
-                            $"'{args[0]}' could be parsed to an int, Usage: '{GetUsageInfo()}'");
+                            $"'{args[0]}' could be parsed to an int, Usage: '{GetUsageSyntax()}'");
                         return;
                     }
                 }
@@ -68,9 +68,9 @@ namespace Terminal.Commands
         ///     Gets the usage syntax info for the command
         /// </summary>
         /// <returns> String containing usage syntax information for the command </returns>
-        public string GetUsageInfo()
+        public string GetUsageSyntax()
         {
-            return UsageInfo;
+            return UsageSyntax;
         }
     }
 }

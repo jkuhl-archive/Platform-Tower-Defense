@@ -5,8 +5,8 @@ namespace Terminal.Commands
 {
     public class Clear : ITerminalCommand
     {
-        private const string Description = "Gives the player the given amount of health";
-        private const string UsageInfo = "clear";
+        private const string Description = "Clear all visible terminal output";
+        private const string UsageSyntax = "clear";
 
         private readonly List<string> commandAliases = new List<string>
         {
@@ -45,9 +45,9 @@ namespace Terminal.Commands
         ///     Gets the usage syntax info for the command
         /// </summary>
         /// <returns> String containing usage syntax information for the command </returns>
-        public string GetUsageInfo()
+        public string GetUsageSyntax()
         {
-            return UsageInfo;
+            return UsageSyntax;
         }
     }
 }

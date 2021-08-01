@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Terminal.Commands;
@@ -24,6 +25,7 @@ namespace Terminal
         private readonly List<ITerminalCommand> availableCommands = new List<ITerminalCommand>();
         private readonly List<GameObject> terminalOutputLines = new List<GameObject>();
         private readonly List<string> inputHistory = new List<string>();
+        private bool isFading;
         private int historyIndex = -1;
         private string inputBuffer;
 
@@ -47,30 +49,51 @@ namespace Terminal
         private void Update()
         {
             // Check if we should toggle the terminal
-            if (!GameUtils.GetGameLoadingLogic().IsGameLoading())
+            if (!GameUtils.GetGameLoadingLogic().IsGameLoading() && !isFading)
                 if (Input.GetKeyUp(KeyCode.BackQuote))
                     ToggleTerminalView();
 
             // Auto select the terminal input field when we have the terminal open
-            if (terminalCanvas.activeSelf)
+            if (terminalCanvas.activeSelf && !isFading)
             {
                 terminalInputField.GetComponent<InputField>().ActivateInputField();
-
                 if (Input.GetKeyUp(KeyCode.UpArrow)) HistoryScrollUp();
-
                 if (Input.GetKeyUp(KeyCode.DownArrow)) HistoryScrollDown();
             }
         }
-
+        
         /// <summary>
-        ///     Returns the list of available terminal commands
+        ///     Fades the terminal overlay in and out
         /// </summary>
-        /// <returns> List of ITerminalCommand objects, one for each command </returns>
-        public List<ITerminalCommand> GetAvailableCommands()
+        /// <param name="enable"> True to fade the terminal in, false if to fade it out </param>
+        /// <returns> null while still in progress </returns>
+        private IEnumerator FadeTerminal(bool enable)
         {
-            return availableCommands;
-        }
+            isFading = true;
+            var startValue = terminalCanvas.GetComponent<CanvasGroup>().alpha;
+            float fadeLength = .2f;
+            float targetValue = 0;
+            float time = 0;
 
+            if (enable)
+            {
+                terminalCanvas.SetActive(true);
+                targetValue = .75f;
+            }
+
+            while (time < fadeLength)
+            {
+                terminalCanvas.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(startValue, targetValue, time / fadeLength);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            terminalCanvas.GetComponent<CanvasGroup>().alpha = targetValue;
+
+            if (!enable) terminalCanvas.SetActive(false);
+            
+            isFading = false;
+        }
+        
         /// <summary>
         ///     Scrolls down through the terminal history
         /// </summary>
@@ -117,6 +140,15 @@ namespace Terminal
         }
 
         /// <summary>
+        ///     Returns the list of available terminal commands
+        /// </summary>
+        /// <returns> List of ITerminalCommand objects, one for each command </returns>
+        public List<ITerminalCommand> GetAvailableCommands()
+        {
+            return availableCommands;
+        }
+
+        /// <summary>
         ///     Attempts to locate and execute a command based on the given terminal input
         /// </summary>
         /// <param name="terminalInput"> Input field that the player typed text in to </param>
@@ -127,7 +159,7 @@ namespace Terminal
             terminalInput.text = string.Empty;
 
             // If the given command string is empty return immediately
-            if (commandString.Length <= 0 || commandString == "`") return;
+            if (commandString.Length <= 0 || commandString.Contains("`")) return;
 
             // Add command string to command history
             inputHistory.Add(commandString);
@@ -166,7 +198,7 @@ namespace Terminal
         public void ToggleTerminalView()
         {
             var toggle = !terminalCanvas.activeSelf;
-            terminalCanvas.SetActive(toggle);
+            StartCoroutine(FadeTerminal(toggle));
         }
 
         /// <summary>
