@@ -12,6 +12,8 @@ namespace Menus
         private const string GameplaySceneName = "GameplayScene";
         private const float ScreenFadeTime = 1.5f;
 
+        private bool isLoading;
+
         [Header("Loading Screen GameObjects")]
         [SerializeField] private CanvasGroup mainLoadingScreenCanvasGroup;
         [SerializeField] private CanvasGroup loadingUiCanvasGroup;
@@ -36,6 +38,8 @@ namespace Menus
 
             // Prevent GameLoadingObject from being destroyed when a new scene is loaded
             DontDestroyOnLoad(gameObject);
+
+            isLoading = false;
 
             // If we are loading the main menu on object start, do so and then return
             if (loadMainMenuOnStart)
@@ -167,6 +171,7 @@ namespace Menus
             }
 
             // Fade out to loading screen
+            isLoading = true;
             yield return StartCoroutine(LoadingScreenFade(true));
 
             // Load new scene asynchronously
@@ -207,6 +212,8 @@ namespace Menus
                 GameUtils.Gameplay_ResetGame();
                 GameUtils.Gameplay_StartGame();
             }
+
+            isLoading = false;
         }
 
         /// <summary>
@@ -257,6 +264,15 @@ namespace Menus
 
                 loadingScreenCanvas.SetActive(false);
             }
+        }
+
+        /// <summary>
+        /// Checks if the game is currently loading or not
+        /// </summary>
+        /// <returns> True if we are in the process of loading, false if not </returns>
+        public bool IsGameLoading()
+        {
+            return isLoading;
         }
 
         /// <summary>
