@@ -77,7 +77,7 @@ namespace Gameplay.Creeps
             isMoving = false;
             animator.SetBool("Victory", true);
             GameUtils.GetPlayerLogic().UpdatePlayerHealth(-attackDamage);
-            GameUtils.GetWaveManager().creepList.Remove(gameObject);
+            GameUtils.GetWaveManager().creepList.Remove(this);
             Destroy(gameObject, (float) (despawnTime * 0.1));
         }
 
@@ -91,7 +91,7 @@ namespace Gameplay.Creeps
             isMoving = false;
             animator.SetBool("Death", true);
             GameUtils.GetPlayerLogic().UpdatePlayerMoney(rewardAmount);
-            GameUtils.GetWaveManager().creepList.Remove(gameObject);
+            GameUtils.GetWaveManager().creepList.Remove(this);
             Destroy(gameObject, despawnTime);
         }
     }

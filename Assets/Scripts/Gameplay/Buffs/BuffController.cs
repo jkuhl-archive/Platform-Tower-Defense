@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Gameplay.BoardPieces;
+using Gameplay.Buffs;
 using UnityEngine;
 namespace Buffs
 {
     public class BuffController : MonoBehaviour
     {
-    
-        public List<GameObject> buffedObjs;
+        public List<Buff> ActiveBuffs;
         // Start is called before the first frame update
         void Start()
         {
@@ -15,21 +16,25 @@ namespace Buffs
         // Update is called once per frame
         void Update()
         {
-            ProcessBuffs(); 
+            ProcessBuffList(); 
         }
 
         // Process the buffs every frame
-        private void ProcessBuffs()
+        private void ProcessBuffList()
         {
-            if (buffedObjs.Count <= 0)
+            if (ActiveBuffs.Count <= 0)
             {
                 return;
             }
             else
             {
-                foreach (var i in buffedObjs)
+                foreach (var i in ActiveBuffs)
                 {
-                
+                    var kill = i.ProcessBuff(Time.deltaTime);
+                    if (kill == true)
+                    {
+                        //
+                    }
                 }
             }
         }

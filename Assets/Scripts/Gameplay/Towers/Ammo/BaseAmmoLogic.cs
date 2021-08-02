@@ -16,7 +16,7 @@ namespace Gameplay.Towers.Ammo
         // Ammo behavior variables
         private bool isInitialized;
         private BoardPiece spawnTower;
-        private GameObject targetCreep;
+        protected BoardPiece targetCreep;
 
         // Update is called once per frame
         private void Update()
@@ -39,7 +39,7 @@ namespace Gameplay.Towers.Ammo
         /// <summary>
         ///     Define what happens when the bullet collides with the target
         /// </summary>
-        private void Collide()
+        protected virtual void Collide()
         {
             targetCreep.GetComponent<BaseCreepLogic>().TakeDamage(ammoDamage, spawnTower);
 
@@ -62,7 +62,7 @@ namespace Gameplay.Towers.Ammo
         /// </summary>
         /// <param name="spawnTower"> Tower GameObject that generated the ammo GameObject </param>
         /// <param name="targetCreep"> Creep GameObject that the ammo being shot towards </param>
-        public void InitializeAmmo(BoardPiece spawnTower, GameObject targetCreep)
+        public void InitializeAmmo(BoardPiece spawnTower, BoardPiece targetCreep)
         {
             this.spawnTower = spawnTower;
             this.targetCreep = targetCreep;

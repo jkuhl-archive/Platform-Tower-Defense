@@ -17,6 +17,7 @@ namespace Gameplay.BoardPieces
         public AudioClip damageSoundEffect;
         public AudioClip deathSoundEffect;
 
+        [SerializeField]
         private float currentHealth;
         private bool isAlive;
 

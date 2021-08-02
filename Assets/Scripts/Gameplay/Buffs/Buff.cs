@@ -1,34 +1,79 @@
-using Gameplay;
+using System;
+using Buffs;
 using Gameplay.BoardPieces;
+using UnityEditor;
 using UnityEngine;
 
-namespace Buffs
+namespace Gameplay.Buffs
 {
-    public abstract class Buff
+    [Serializable]
+    public class Buff
+
     {
-        [Header("Buff Parameters")]
+        [Header("Buff Parameters")] 
+        public bool active = true;
         public float duration; //How long the buff should be applied
+        protected float timeLeft; //
         public bool toggle; //Does this buff happen just once, or does it effect an attribute repetitively
         public float frequency; //How long between effect repetitions
-        protected BoardPiece target;
-    
+        public float timeTilRepeat;
+        protected BoardPiece Target;
+        
+        
+        /// <summary>
+        /// Iterate through the list of buffs and process their respective logic
+        /// </summary>
+        /// <param name="time">Time between frames which we will pass to the buffs to process their logic</param>
+        /// <returns></returns>
+        public bool ProcessBuff(float time)
+        {
+            if (!active) return active;
+            timeLeft -= time;
+            if (timeLeft <= 0)
+            {
+                ExitEffect();
+                active = false;
+                return active;
+            }
+            Debug.Log(timeLeft);
+            if (!toggle && active)
+            {
+                timeTilRepeat -= time;
+                Debug.Log(timeTilRepeat);
+                if (timeTilRepeat <= 0)
+                {
+                    Effect();
+                    timeTilRepeat = frequency;
+                }
+            }
+            return active;
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="target"></param> The object the buff is being applied to
-        public Buff(BoardPiece target)
+        protected Buff(BoardPiece target)
         {
-            this.target = target;
-            if (toggle == true)
+            Target = target;
+            if (!toggle)
             {
                 frequency = duration;
             }
+            
+            Effect();
         }
         /// <summary>
         /// Define what the buff does
         /// </summary>
         /// <param name="target">What the buff is being applied to</param>
-        protected virtual void Effect(BoardPiece target)
+        protected virtual void Effect()
+        {
+        }
+        /// <summary>
+        /// Define what, if anything, the buff does upon completion.
+        /// </summary>
+        protected virtual void ExitEffect()
         {
         }
     }

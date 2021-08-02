@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.BoardPieces;
 using UnityEngine;
 using Utilities;
 
@@ -12,18 +13,18 @@ namespace Gameplay.WaveLogic
         [SerializeField] private string wavePlaylistName;
 
         [Header("Creep Prefabs")]
-        [SerializeField] private GameObject gruntPrefab;
-        [SerializeField] private GameObject fastGruntPrefab;
-        [SerializeField] private GameObject tankGruntPrefab;
+        [SerializeField] private BoardPiece gruntPrefab;
+        [SerializeField] private BoardPiece fastGruntPrefab;
+        [SerializeField] private BoardPiece tankGruntPrefab;
 
         [Header("Active Creeps")]
-        public List<GameObject> creepList;
+        public List<BoardPiece> creepList;
 
         // Creep spawn point
         private GameObject startPoint;
 
         // Dictionary that stores a list of creeps that were spawned in each round, creeps are removed as they die
-        private readonly Dictionary<int, List<GameObject>> waveActiveCreeps = new Dictionary<int, List<GameObject>>();
+        private readonly Dictionary<int, List<BoardPiece>> waveActiveCreeps = new Dictionary<int, List<BoardPiece>>();
 
         // Wave data used for spawning creeps
         private WavePlaylist wavePlaylist;
@@ -70,7 +71,7 @@ namespace Gameplay.WaveLogic
 
                 // Add newly spawned creep to list of creeps spawned during this wave
                 if (!waveActiveCreeps.ContainsKey(wavePlaylist.GetCurrentWaveNumber()))
-                    waveActiveCreeps.Add(wavePlaylist.GetCurrentWaveNumber(), new List<GameObject>());
+                    waveActiveCreeps.Add(wavePlaylist.GetCurrentWaveNumber(), new List<BoardPiece>());
                 waveActiveCreeps[wavePlaylist.GetCurrentWaveNumber()].Add(newCreep);
             }
 
@@ -100,7 +101,7 @@ namespace Gameplay.WaveLogic
         /// </summary>
         /// <param name="prefabName"> Name of the creep prefab we want to get </param>
         /// <returns> GameObject containing the creep prefab </returns>
-        private GameObject GetCreepPrefabByName(string prefabName)
+        private BoardPiece GetCreepPrefabByName(string prefabName)
         {
             switch (prefabName)
             {

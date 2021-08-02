@@ -17,14 +17,14 @@ namespace Gameplay.Towers
         [SerializeField] private Material towerRangeCircleMaterial;
 
         [Header("Tower Ammo Prefab")]
-        [SerializeField] private GameObject ammoPrefab;
+        [SerializeField] protected GameObject ammoPrefab;
 
         [Header("Tower Sound Effects")]
         [SerializeField] private AudioClip towerFireSoundEffect;
         [SerializeField] private AudioClip towerHighlightSoundEffect;
 
         // Tower behavior variables
-        private GameObject ammoSpawnPoint;
+        protected GameObject ammoSpawnPoint;
 
         // Creep kill stats
         private int creepKillCounter;
@@ -115,7 +115,7 @@ namespace Gameplay.Towers
         ///     Rotates the tower to face the given creep
         /// </summary>
         /// <param name="targetCreep"> Creep that we want the tower to rotate towards </param>
-        private void RotateTowardsTarget(GameObject targetCreep)
+        private void RotateTowardsTarget(BoardPiece targetCreep)
         {
             var heading = targetCreep.transform.position - transform.position;
             var heading2d = new Vector2(heading.x, heading.z).normalized;
@@ -127,7 +127,7 @@ namespace Gameplay.Towers
         ///     Fires the tower's ammo prefab at the given creep
         /// </summary>
         /// <param name="targetCreep"> Creep that we want to shoot the ammo towards </param>
-        private void TowerShoot(GameObject targetCreep)
+        private void TowerShoot(BoardPiece targetCreep)
         {
             if (Time.time > nextFireTime)
             {
@@ -140,7 +140,7 @@ namespace Gameplay.Towers
         ///     Define What the tower does once it's time to attack
         /// </summary>
         /// <param name="targetCreep"></param>
-        protected virtual void Attack(GameObject targetCreep)
+        protected virtual void Attack(BoardPiece targetCreep)
         {
             var newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint.transform.position, ammoPrefab.transform.rotation);
             newAmmo.GetComponent<BaseAmmoLogic>().InitializeAmmo(this, targetCreep);

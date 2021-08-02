@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3516555577920296178}
   - component: {fileID: 3516555577920296179}
   - component: {fileID: 3516555577920296173}
+  - component: {fileID: 8945502804144409177}
   m_Layer: 0
   m_Name: GameLogic
   m_TagString: Untagged
@@ -156,7 +157,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wavePlaylistName: test1
-  gruntPrefab: {fileID: 3729896304444588828, guid: b3e43f6a76ae2aa9f8a5b515bc2df582, type: 3}
-  fastGruntPrefab: {fileID: 342657181421073587, guid: 6507a968457b99c55a6cee0da2a2722f, type: 3}
-  tankGruntPrefab: {fileID: 3920149986052969328, guid: f3ff0e65f63afac2f8366b97ffb06c6b, type: 3}
+  gruntPrefab: {fileID: 3772302067279381336, guid: b3e43f6a76ae2aa9f8a5b515bc2df582, type: 3}
+  fastGruntPrefab: {fileID: 242056072490677495, guid: 6507a968457b99c55a6cee0da2a2722f, type: 3}
+  tankGruntPrefab: {fileID: 3602180375090959156, guid: f3ff0e65f63afac2f8366b97ffb06c6b, type: 3}
   creepList: []
+--- !u!114 &8945502804144409177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3516555577920296176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53377589c0e67859992840dac2f1dd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveBuffs: []

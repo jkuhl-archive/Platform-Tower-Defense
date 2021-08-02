@@ -1,5 +1,8 @@
 using System.IO;
+using Buffs;
 using Gameplay;
+using Gameplay.BoardPieces;
+using Gameplay.Buffs;
 using Gameplay.WaveLogic;
 using Menus;
 using Terminal;
@@ -18,6 +21,12 @@ namespace Utilities
         // Static location for storing a reference to objects that are never destroyed
         private static GameObject _gameLoadingObject;
         private static GameObject _terminalObject;
+
+        public static void CreateBuff(Buff buffToAdd)
+        {
+            var buffController = GetRootGameObjectByName("GameLogic").GetComponent<BuffController>();
+            buffController.ActiveBuffs.Add(buffToAdd);
+        }
 
         /// <summary>
         ///     Exits the application
