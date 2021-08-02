@@ -5,29 +5,30 @@ namespace Gameplay.Buffs
 {
     public class BleedDebuff : Buff
     {
-        
-        private int bleedDamage = 1;
-        
+        private readonly int bleedDamage = 1;
+
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
-        /// <param name="target"></param> the object the buff is being applied to
+        /// <param name="target"></param>
+        /// the object the buff is being applied to
         public BleedDebuff(BoardPiece target) : base(target)
         {
-            this.toggle = false;
-            this.duration = 3;
-            this.timeLeft = duration;
-            this.frequency = (float) .3;
-            this.timeTilRepeat = this.frequency;
+            toggle = false;
+            duration = 3;
+            timeLeft = duration;
+            frequency = (float) .3;
+            timeTilRepeat = frequency;
         }
-        
+
         /// <summary>
-        /// Define what the buff does
+        ///     Define what the buff does
         /// </summary>
-        /// <param name="target"></param> The object being buffed
+        /// <param name="target"></param>
+        /// The object being buffed
         protected override void Effect()
         {
-            if(Target != null)
+            if (Target != null)
             {
                 Target.TakeDamage(bleedDamage, Target);
                 Debug.Log("Ouch I'm bleeding!");
@@ -36,10 +37,10 @@ namespace Gameplay.Buffs
             {
                 active = false;
             }
-
         }
+
         /// <summary>
-        /// Define what the buff does when it reaches the end of its logic
+        ///     Define what the buff does when it reaches the end of its logic
         /// </summary>
         protected override void ExitEffect()
         {
