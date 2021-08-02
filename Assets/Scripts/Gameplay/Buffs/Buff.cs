@@ -27,19 +27,21 @@ namespace Gameplay.Buffs
         /// <returns></returns>
         public bool ProcessBuff(float time)
         {
-            if (!active) return active;
+            if (Target is null)
+            {
+                active = false;
+                ExitEffect();
+            }
             timeLeft -= time;
-            if (timeLeft <= 0)
+            if (timeLeft <= 0 && active)
             {
                 ExitEffect();
                 active = false;
                 return active;
             }
-            Debug.Log(timeLeft);
             if (!toggle && active)
             {
                 timeTilRepeat -= time;
-                Debug.Log(timeTilRepeat);
                 if (timeTilRepeat <= 0)
                 {
                     Effect();
@@ -75,6 +77,7 @@ namespace Gameplay.Buffs
         /// </summary>
         protected virtual void ExitEffect()
         {
+            
         }
     }
 }

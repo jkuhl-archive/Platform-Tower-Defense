@@ -18,6 +18,7 @@ MonoBehaviour:
   attackSpeed: 1
   damageSoundEffect: {fileID: 0}
   deathSoundEffect: {fileID: 0}
+  currentHealth: 0
   towerRange: 5
   towerRangeCircleMaterial: {fileID: 2100000, guid: a3c0bf0fcecbfc9979bb30f9a0338da3, type: 2}
   ammoPrefab: {fileID: 7228300690433211953, guid: d1be0410b8896c8dc8f05ee00aeba5a8, type: 3}
@@ -39,8 +40,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7228300690433211953, guid: d1be0410b8896c8dc8f05ee00aeba5a8, type: 3}
     - target: {fileID: 1305695257151193180, guid: d935d2c9a0fb50e66b0c0e06cc6b90ac, type: 3}
+      propertyPath: attackSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305695257151193180, guid: d935d2c9a0fb50e66b0c0e06cc6b90ac, type: 3}
       propertyPath: attackDamage
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4119784824353556237, guid: d935d2c9a0fb50e66b0c0e06cc6b90ac, type: 3}
       propertyPath: m_RootOrder

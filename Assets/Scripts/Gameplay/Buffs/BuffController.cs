@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Gameplay.BoardPieces;
 using Gameplay.Buffs;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Buffs
     public class BuffController : MonoBehaviour
     {
         public List<Buff> ActiveBuffs;
+        public List<Buff> InactiveBuffs;
 
         // Update is called once per frame
         void Update()
@@ -25,20 +27,29 @@ namespace Buffs
             }
             else
             {
-                foreach (var i in ActiveBuffs)
+                foreach (var i in ActiveBuffs.ToArray())
                 {
-                    var kill = i.ProcessBuff(Time.deltaTime);
-                    if (kill == true)
+                    var alive = i.ProcessBuff(Time.deltaTime);
+                    if (!alive)
                     {
-                        //Figure out how to handle buffs that are done
+                        InactiveBuffs.Add(i);
                     }
+
+                    foreach (var e in InactiveBuffs)
+                    {
+                        if (ActiveBuffs.Contains(e))
+                        {
+                            ActiveBuffs.Remove(e);
+                        }
+                    }
+                    InactiveBuffs.Clear();
                 }
             }
         }
     
-        public void AddBuff(GameObject item, Buff buff)
+        public void AddBuff(Buff buff)
         {
-        
+            ActiveBuffs.Add(buff);
         }
     }
 }

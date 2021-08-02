@@ -2,6 +2,7 @@ using Buffs;
 using UnityEngine;
 using Utilities;
 
+
 namespace Gameplay.Towers.Ammo
 {
     // TODO: Buff system rework
@@ -13,7 +14,7 @@ namespace Gameplay.Towers.Ammo
        {
            protected override void Collide()
            {
-               GameUtils.CreateBuff(new BleedDebuff(targetCreep));
+               GameUtils.GetBuffController().AddBuff(new BleedDebuff(targetCreep));
                base.Collide();
            }
        }

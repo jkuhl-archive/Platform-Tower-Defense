@@ -18,9 +18,9 @@ namespace Buffs
         public BleedDebuff(BoardPiece target) : base(target)
         {
             this.toggle = false;
-            this.duration = 6;
+            this.duration = 3;
             this.timeLeft = duration;
-            this.frequency = 1;
+            this.frequency = (float) .3;
             this.timeTilRepeat = this.frequency;
         }
         
@@ -30,8 +30,16 @@ namespace Buffs
         /// <param name="target"></param> The object being buffed
         protected override void Effect()
         {
-            Target.TakeDamage(bleedDamage, Target);
-            Debug.Log("Ouch I'm bleeding!");
+            if(Target != null)
+            {
+                Target.TakeDamage(bleedDamage, Target);
+                Debug.Log("Ouch I'm bleeding!");
+            }
+            else
+            {
+                active = false;
+            }
+
         }
         protected override void ExitEffect()
         {

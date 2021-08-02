@@ -22,12 +22,6 @@ namespace Utilities
         private static GameObject _gameLoadingObject;
         private static GameObject _terminalObject;
 
-        public static void CreateBuff(Buff buffToAdd)
-        {
-            var buffController = GetRootGameObjectByName("GameLogic").GetComponent<BuffController>();
-            buffController.ActiveBuffs.Add(buffToAdd);
-        }
-
         /// <summary>
         ///     Exits the application
         /// </summary>
@@ -106,6 +100,11 @@ namespace Utilities
         public static BaseGameUI GetBaseGameUI()
         {
             return GetRootGameObjectByName("GameUI").GetComponent<BaseGameUI>();
+        }
+
+        public static BuffController GetBuffController()
+        {
+            return GetRootGameObjectByName("GameLogic").GetComponent<BuffController>();
         }
 
         /// <summary>
