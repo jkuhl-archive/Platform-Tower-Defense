@@ -1,10 +1,7 @@
-using System;
-using Gameplay;
 using Gameplay.BoardPieces;
-using Gameplay.Buffs;
 using UnityEngine;
 
-namespace Buffs
+namespace Gameplay.Buffs
 {
     public class BleedDebuff : Buff
     {
@@ -41,6 +38,9 @@ namespace Buffs
             }
 
         }
+        /// <summary>
+        /// Define what the buff does when it reaches the end of its logic
+        /// </summary>
         protected override void ExitEffect()
         {
             Debug.Log("I stopped bleeding");

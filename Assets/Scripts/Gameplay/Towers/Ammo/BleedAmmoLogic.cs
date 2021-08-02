@@ -1,4 +1,4 @@
-using Buffs;
+using Gameplay.Buffs;
 using UnityEngine;
 using Utilities;
 

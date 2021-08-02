@@ -1,5 +1,4 @@
 using System;
-using Buffs;
 using Gameplay.BoardPieces;
 using UnityEditor;
 using UnityEngine;
@@ -11,12 +10,12 @@ namespace Gameplay.Buffs
 
     {
         [Header("Buff Parameters")] 
-        public bool active = true;
-        public float duration; //How long the buff should be applied
+        protected bool active = true;
+        protected float duration; //How long the buff should be applied
         protected float timeLeft; //
-        public bool toggle; //Does this buff happen just once, or does it effect an attribute repetitively
-        public float frequency; //How long between effect repetitions
-        public float timeTilRepeat;
+        protected bool toggle; //Does this buff happen just once, or does it effect an attribute repetitively
+        protected float frequency; //How long between effect repetitions
+        protected float timeTilRepeat;
         protected BoardPiece Target;
         
         
@@ -27,19 +26,19 @@ namespace Gameplay.Buffs
         /// <returns></returns>
         public bool ProcessBuff(float time)
         {
-            if (Target is null)
+            if (Target is null) 
             {
                 active = false;
                 ExitEffect();
             }
             timeLeft -= time;
-            if (timeLeft <= 0 && active)
+            if (timeLeft <= 0 && active) //What to do when time runs out
             {
                 ExitEffect();
                 active = false;
                 return active;
             }
-            if (!toggle && active)
+            if (!toggle && active) //If this isn't a toggle effect, process the frequency
             {
                 timeTilRepeat -= time;
                 if (timeTilRepeat <= 0)

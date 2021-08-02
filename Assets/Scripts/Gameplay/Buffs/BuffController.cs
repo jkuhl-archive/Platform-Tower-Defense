@@ -1,15 +1,21 @@
 using System.Collections.Generic;
-using System.Linq;
-using Gameplay.BoardPieces;
-using Gameplay.Buffs;
 using UnityEngine;
-namespace Buffs
+
+namespace Gameplay.Buffs
 {
     public class BuffController : MonoBehaviour
     {
         public List<Buff> ActiveBuffs;
-        public List<Buff> InactiveBuffs;
 
+        /// <summary>
+        ///  Quick and easy way to add a buff
+        /// </summary>
+        /// <param name="buff">The class being added</param>
+        public void AddBuff(Buff buff)
+        {
+            ActiveBuffs.Add(buff);
+        }
+        
         // Update is called once per frame
         void Update()
         {
@@ -29,27 +35,16 @@ namespace Buffs
             {
                 foreach (var i in ActiveBuffs.ToArray())
                 {
-                    var alive = i.ProcessBuff(Time.deltaTime);
-                    if (!alive)
+                    var isBuffActive = i.ProcessBuff(Time.deltaTime);
+                    if (!isBuffActive)
                     {
-                        InactiveBuffs.Add(i);
+                        ActiveBuffs.Remove(i);
                     }
-
-                    foreach (var e in InactiveBuffs)
-                    {
-                        if (ActiveBuffs.Contains(e))
-                        {
-                            ActiveBuffs.Remove(e);
-                        }
-                    }
-                    InactiveBuffs.Clear();
                 }
             }
         }
-    
-        public void AddBuff(Buff buff)
-        {
-            ActiveBuffs.Add(buff);
-        }
+        
+        
+        
     }
 }
