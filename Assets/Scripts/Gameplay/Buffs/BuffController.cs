@@ -7,11 +7,6 @@ namespace Buffs
     public class BuffController : MonoBehaviour
     {
         public List<Buff> ActiveBuffs;
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
         // Update is called once per frame
         void Update()
@@ -19,7 +14,9 @@ namespace Buffs
             ProcessBuffList(); 
         }
 
-        // Process the buffs every frame
+        /// <summary>
+        /// Process each buff in the ActiveBuffs list;
+        /// </summary>
         private void ProcessBuffList()
         {
             if (ActiveBuffs.Count <= 0)
@@ -33,7 +30,7 @@ namespace Buffs
                     var kill = i.ProcessBuff(Time.deltaTime);
                     if (kill == true)
                     {
-                        //
+                        //Figure out how to handle buffs that are done
                     }
                 }
             }
