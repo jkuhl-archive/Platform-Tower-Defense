@@ -11,6 +11,7 @@ namespace Gameplay
         private const string BuyPlatformButtonName = "BuyPlatformButton";
         private const string MovePlatformButtonName = "MovePlatformButton";
         private const string BuyCannonTowerButtonName = "BuyCannonTowerButton";
+        private const string BuyBleedTowerButtonName = "BuyBleedTowerButton";
         private const string MoneyCounterTextName = "MoneyCounter";
         private const string HealthCounterTextName = "HealthCounter";
         private const string WaveCounterTextName = "WaveCounter";
@@ -59,6 +60,12 @@ namespace Gameplay
             var buyCannonTowerButton = GetUiObjectByName(BuyCannonTowerButtonName).GetComponent<Button>();
             if (buyCannonTowerButton.interactable != canBuyCannonTower)
                 buyCannonTowerButton.interactable = canBuyCannonTower;
+            
+            // Attempt to update buy bleed tower button
+            var canBuyBleedTower = GameUtils.GetPlayerLogic().CanBuyTower(GameplayPriceConstants.BuyBleedTowerCost);
+            var buyBleedTowerButton = GetUiObjectByName(BuyBleedTowerButtonName).GetComponent<Button>();
+            if (buyBleedTowerButton.interactable != canBuyBleedTower)
+                buyBleedTowerButton.interactable = canBuyBleedTower;
         }
 
         /// <summary>
@@ -80,6 +87,11 @@ namespace Gameplay
             var buyCannonTowerString = $"Buy Cannon Tower: ${GameplayPriceConstants.BuyCannonTowerCost}";
             var buyCannonTowerText = GetUiObjectByName(BuyCannonTowerButtonName).GetComponentInChildren<Text>();
             if (buyCannonTowerText.text != buyCannonTowerString) buyCannonTowerText.text = buyCannonTowerString;
+            
+            // Attempt to update buy bleed tower text
+            var buyBleedTowerString = $"Buy Bleed Tower: ${GameplayPriceConstants.BuyBleedTowerCost}";
+            var buyBleedTowerText = GetUiObjectByName(BuyBleedTowerButtonName).GetComponentInChildren<Text>();
+            if (buyBleedTowerText.text != buyBleedTowerString) buyBleedTowerText.text = buyBleedTowerString;
         }
         
         /// <summary>

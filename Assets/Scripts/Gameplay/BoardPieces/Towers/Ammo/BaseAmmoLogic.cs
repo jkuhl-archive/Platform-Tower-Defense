@@ -1,9 +1,8 @@
-using Gameplay.BoardPieces;
-using Gameplay.Creeps;
+using Gameplay.BoardPieces.Creeps;
 using UnityEngine;
 using Utilities;
 
-namespace Gameplay.Towers.Ammo
+namespace Gameplay.BoardPieces.Towers.Ammo
 {
     public class BaseAmmoLogic : MonoBehaviour
     {
@@ -11,12 +10,12 @@ namespace Gameplay.Towers.Ammo
         [SerializeField] private float ammoMovementSpeed;
         [SerializeField] private float ammoTriggerRange;
         [SerializeField] private GameObject ammoHitPrefab;
-        private int ammoDamage;
 
         // Ammo behavior variables
         private bool isInitialized;
-        private BoardPiece spawnTower;
+        protected BoardPiece attackingTower;
         protected BoardPiece targetCreep;
+        private int ammoDamage;
 
         // Update is called once per frame
         private void Update()
@@ -37,18 +36,6 @@ namespace Gameplay.Towers.Ammo
         }
 
         /// <summary>
-        ///     Define what happens when the bullet collides with the target
-        /// </summary>
-        protected virtual void Collide()
-        {
-            targetCreep.GetComponent<BaseCreepLogic>().TakeDamage(ammoDamage, spawnTower);
-
-            if (ammoHitPrefab != null) Explode();
-
-            Destroy(gameObject);
-        }
-
-        /// <summary>
         ///     Triggers the ammo hit and then destroys the ammo GameObject
         /// </summary>
         private void Explode()
@@ -56,17 +43,28 @@ namespace Gameplay.Towers.Ammo
             var ammoHit = Instantiate(ammoHitPrefab, transform.position, ammoHitPrefab.transform.rotation);
             Destroy(ammoHit, 3);
         }
+        
+        /// <summary>
+        ///     Define what happens when the bullet collides with the target
+        /// </summary>
+        protected virtual void Collide()
+        {
+            targetCreep.GetComponent<BaseCreepLogic>().TakeDamage(ammoDamage, attackingTower);
+
+            if (ammoHitPrefab != null) Explode();
+            Destroy(gameObject);
+        }
 
         /// <summary>
         ///     Initializes required ammo variables
         /// </summary>
-        /// <param name="spawnTower"> Tower GameObject that generated the ammo GameObject </param>
+        /// <param name="attackingTower"> Tower GameObject that generated the ammo GameObject </param>
         /// <param name="targetCreep"> Creep GameObject that the ammo being shot towards </param>
-        public void InitializeAmmo(BoardPiece spawnTower, BoardPiece targetCreep)
+        public void InitializeAmmo(BoardPiece attackingTower, BoardPiece targetCreep)
         {
-            this.spawnTower = spawnTower;
+            this.attackingTower = attackingTower;
             this.targetCreep = targetCreep;
-            ammoDamage = spawnTower.attackDamage;
+            ammoDamage = attackingTower.GetAttackDamage();
             isInitialized = true;
         }
     }

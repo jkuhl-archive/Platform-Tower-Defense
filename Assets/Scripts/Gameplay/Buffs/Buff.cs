@@ -1,74 +1,47 @@
-using System;
 using Gameplay.BoardPieces;
 using UnityEngine;
 
 namespace Gameplay.Buffs
 {
-    [Serializable]
     public class Buff
-
     {
-        [Header("Buff Parameters")] protected bool active = true;
+        // Buff effect variables
+        private readonly bool isBuffRepeating;
+        private readonly float buffDuration;
+        private readonly float buffRepeatFrequency;
 
-        protected float duration; //How long the buff should be applied
-        protected float frequency; //How long between effect repetitions
-        protected BoardPiece Target;
-        protected float timeLeft; //
-        protected float timeTilRepeat;
-        protected bool toggle; //Does this buff happen just once, or does it effect an attribute repetitively
+        // Object the buff is being applied to 
+        protected readonly BoardPiece target;
+
+        // Buff state parameters
+        protected bool buffActive = true;
+        private float timeUntilBuffExpires;
+        private float timeUntilRepeat;
 
         /// <summary>
-        ///     Constructor
+        ///     Base buff constructor
         /// </summary>
-        /// <param name="target"></param>
-        /// The object the buff is being applied to
-        protected Buff(BoardPiece target)
+        /// <param name="target"> The object the buff is being applied to </param>
+        /// <param name="isBuffRepeating"> Should the buff effect be applied multiple times on a time interval </param>
+        /// <param name="buffDuration"> Amount of time the buff effect should be active </param>
+        /// <param name="buffRepeatFrequency"> Amount of time between buff effect application for repeating buffs </param>
+        protected Buff(BoardPiece target, bool isBuffRepeating, float buffDuration, float buffRepeatFrequency)
         {
-            Target = target;
-            if (!toggle) frequency = duration;
+            this.target = target;
+            this.isBuffRepeating = isBuffRepeating;
+            this.buffDuration = buffDuration;
+            this.buffRepeatFrequency = buffRepeatFrequency;
+
+            // Set buff timers based on input duration and repeat frequency
+            timeUntilBuffExpires = buffDuration;
+            if (isBuffRepeating) timeUntilRepeat = buffRepeatFrequency;
 
             Effect();
         }
 
-
         /// <summary>
-        ///     Iterate through the list of buffs and process their respective logic
+        ///     Defines buff logic
         /// </summary>
-        /// <param name="time">Time between frames which we will pass to the buffs to process their logic</param>
-        /// <returns></returns>
-        public bool ProcessBuff(float time)
-        {
-            if (Target is null)
-            {
-                active = false;
-                ExitEffect();
-            }
-
-            timeLeft -= time;
-            if (timeLeft <= 0 && active) //What to do when time runs out
-            {
-                ExitEffect();
-                active = false;
-                return active;
-            }
-
-            if (!toggle && active) //If this isn't a toggle effect, process the frequency
-            {
-                timeTilRepeat -= time;
-                if (timeTilRepeat <= 0)
-                {
-                    Effect();
-                    timeTilRepeat = frequency;
-                }
-            }
-
-            return active;
-        }
-
-        /// <summary>
-        ///     Define what the buff does
-        /// </summary>
-        /// <param name="target">What the buff is being applied to</param>
         protected virtual void Effect()
         {
         }
@@ -78,6 +51,40 @@ namespace Gameplay.Buffs
         /// </summary>
         protected virtual void ExitEffect()
         {
+        }
+
+        /// <summary>
+        ///     Handles applying the buff's effect if it is time to do so
+        /// </summary>
+        /// <returns> Returns true if the buff is active, false if not </returns>
+        public bool ProcessBuff()
+        {
+            if (target is null)
+            {
+                buffActive = false;
+                ExitEffect();
+            }
+
+            // What to do when time runs out
+            timeUntilBuffExpires -= Time.deltaTime;
+            if (timeUntilBuffExpires <= 0 && buffActive)
+            {
+                ExitEffect();
+                buffActive = false;
+            }
+
+            // If this isn't a toggle effect, process the frequency
+            if (isBuffRepeating && buffActive)
+            {
+                timeUntilRepeat -= Time.deltaTime;
+                if (timeUntilRepeat <= 0)
+                {
+                    Effect();
+                    timeUntilRepeat = buffRepeatFrequency;
+                }
+            }
+
+            return buffActive;
         }
     }
 }

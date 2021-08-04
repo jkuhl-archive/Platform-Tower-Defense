@@ -1,5 +1,5 @@
 using Data;
-using Gameplay.Towers;
+using Gameplay.BoardPieces.Towers;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -170,7 +170,7 @@ namespace Gameplay
                     break;
 
                 case "BleedTower":
-                    towerCost = GameplayPriceConstants.BuyCannonTowerCost;
+                    towerCost = GameplayPriceConstants.BuyBleedTowerCost;
                     break;
             }
 

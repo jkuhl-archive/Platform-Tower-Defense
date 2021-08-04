@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 2258431332188272343}
   - component: {fileID: 2471107231517298719}
   - component: {fileID: 1305695257151193180}
+  - component: {fileID: -1878871198574904203}
   m_Layer: 0
   m_Name: CannonTower
   m_TagString: Untagged
@@ -337,19 +338,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8221b501426dd7cebab5ec8d44b343e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
   startingHealth: 10
-  movementSpeed: 0
-  attackSpeed: 1
+  startingAttackDamage: 2
+  startingAttackSpeed: 1
+  startingMovementSpeed: 0
   damageSoundEffect: {fileID: 0}
   deathSoundEffect: {fileID: 0}
   towerRange: 5
-  rotationSpeed: 0.5
   towerRangeCircleMaterial: {fileID: 2100000, guid: a3c0bf0fcecbfc9979bb30f9a0338da3, type: 2}
-  ammoPrefab: {fileID: 359603495308909025, guid: ac6d8eefef5be475db4197ebbb9e865b, type: 3}
-  towerFireSoundEffect: {fileID: 8300000, guid: 348aef54cffffc97da9d6a43f3b98cc2, type: 3}
+  towerAttackLogic: {fileID: -1878871198574904203}
   towerHighlightSoundEffect: {fileID: 8300000, guid: 0c8a77c68af74fd928185c51fd3c86dd, type: 3}
-  creepKillCounter: 0
+--- !u!114 &-1878871198574904203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123500432601173869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c92264b2108d0498563e6ab1e368e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 359603495308909025, guid: ac6d8eefef5be475db4197ebbb9e865b, type: 3}
+  attackSoundEffect: {fileID: 8300000, guid: 348aef54cffffc97da9d6a43f3b98cc2, type: 3}
 --- !u!1 &4123593784029841369
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +374,7 @@ GameObject:
   - component: {fileID: 4128536474988516595}
   - component: {fileID: 4138502012439565309}
   m_Layer: 0
-  m_Name: Base
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

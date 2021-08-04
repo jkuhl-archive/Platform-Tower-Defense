@@ -1,14 +1,11 @@
 using System.Collections.Generic;
-using Gameplay.BoardPieces;
 using UnityEngine;
 using Utilities;
 
-namespace Gameplay.Creeps
+namespace Gameplay.BoardPieces.Creeps
 {
     public class BaseCreepLogic : BoardPiece
     {
-        // TODO: Buff system rework
-
         [Header("Creep Starting Stats")]
         [SerializeField] private int rewardAmount;
         [SerializeField] private float despawnTime;
@@ -54,7 +51,7 @@ namespace Gameplay.Creeps
                 var newPosition = new Vector3(nodeTransform.position.x, transform.position.y, nodeTransform.position.z);
 
                 transform.position = Vector3.MoveTowards(transform.position,
-                    newPosition, Time.deltaTime * movementSpeed);
+                    newPosition, Time.deltaTime * currentMovementSpeed);
 
                 if (Vector3.Distance(transform.position, newPosition) < 0.1f)
                 {
@@ -76,7 +73,7 @@ namespace Gameplay.Creeps
         {
             isMoving = false;
             animator.SetBool("Victory", true);
-            GameUtils.GetPlayerLogic().UpdatePlayerHealth(-attackDamage);
+            GameUtils.GetPlayerLogic().UpdatePlayerHealth(-currentAttackDamage);
             GameUtils.GetWaveManager().creepList.Remove(this);
             Destroy(gameObject, (float) (despawnTime * 0.1));
         }
@@ -85,7 +82,7 @@ namespace Gameplay.Creeps
         ///     Handles the creep death workflow
         /// </summary>
         /// <param name="attacker"> BoardPiece that killed this creep </param>
-        public override void Death(BoardPiece attacker)
+        protected override void Death(BoardPiece attacker)
         {
             base.Death(attacker);
             isMoving = false;

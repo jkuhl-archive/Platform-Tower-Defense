@@ -477,10 +477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd60d166733af9db2fc9cacd36752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 3
   startingHealth: 8
-  movementSpeed: 6
-  attackSpeed: 1
+  startingAttackDamage: 3
+  startingAttackSpeed: 1
+  startingMovementSpeed: 6
   damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
   deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
   rewardAmount: 5
@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 345535685346703985}
   - component: {fileID: 372810460656613935}
   m_Layer: 0
-  m_Name: Goblin002
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

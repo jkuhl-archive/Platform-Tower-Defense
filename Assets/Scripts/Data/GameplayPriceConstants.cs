@@ -6,7 +6,8 @@ namespace Data
         public const int BuyPlatformCost = 350;
         public const int MovePlatformCost = 175;
 
-        // Cannon tower cost variables
+        // Tower cost variables
         public const int BuyCannonTowerCost = 100;
+        public const int BuyBleedTowerCost = 175;
     }
 }

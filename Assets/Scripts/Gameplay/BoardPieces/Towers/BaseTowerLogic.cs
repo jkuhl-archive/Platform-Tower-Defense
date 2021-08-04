@@ -1,36 +1,32 @@
 using System;
-using Gameplay.BoardPieces;
-using Gameplay.Towers.Ammo;
+using Gameplay.BoardPieces.Towers.TowerAttacks;
 using UnityEngine;
 using Utilities;
 
-namespace Gameplay.Towers
+namespace Gameplay.BoardPieces.Towers
 {
     public class BaseTowerLogic : BoardPiece
     {
-        // TODO: Buff system rework
-
         [Header("Tower Starting Stats")]
         [SerializeField] private float towerRange;
 
         [Header("Range Circle Material")]
         [SerializeField] private Material towerRangeCircleMaterial;
 
-        [Header("Tower Ammo Prefab")]
-        [SerializeField] protected GameObject ammoPrefab;
+        [Header("Tower Attack Logic")]
+        [SerializeField] private BaseTowerAttackLogic towerAttackLogic;
 
-        [Header("Tower Sound Effects")]
-        [SerializeField] private AudioClip towerFireSoundEffect;
+        [Header("Tower Highlight Sound Effect")]
         [SerializeField] private AudioClip towerHighlightSoundEffect;
 
         // Tower behavior variables
-        protected GameObject ammoSpawnPoint;
-
-        // Creep kill stats
-        private int creepKillCounter;
+        private GameObject ammoSpawnPoint;
         private float nextFireTime;
         private LineRenderer towerRangeCircle;
 
+        // Creep kill stats
+        private int creepKillCounter;
+        
         // Start is called before the first frame update
         public override void Start()
         {
@@ -131,20 +127,19 @@ namespace Gameplay.Towers
         {
             if (Time.time > nextFireTime)
             {
-                nextFireTime = Time.time + attackSpeed;
-                Attack(targetCreep);
+                nextFireTime = Time.time + currentAttackSpeed;
+                towerAttackLogic.Attack(ammoSpawnPoint.transform.position, this, targetCreep);
             }
         }
-
+        
         /// <summary>
-        ///     Define What the tower does once it's time to attack
+        ///     Logic triggered when this tower kills something
         /// </summary>
-        /// <param name="targetCreep"></param>
-        protected virtual void Attack(BoardPiece targetCreep)
+        /// <param name="victim"> BoardPiece object for the thing that was killed </param>
+        protected override void KillTarget(BoardPiece victim)
         {
-            var newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint.transform.position, ammoPrefab.transform.rotation);
-            newAmmo.GetComponent<BaseAmmoLogic>().InitializeAmmo(this, targetCreep);
-            if (GameSettingsUtils.IsSoundEnabled()) GetComponent<AudioSource>().PlayOneShot(towerFireSoundEffect);
+            base.KillTarget(victim);
+            creepKillCounter += 1;
         }
 
         /// <summary>
@@ -163,16 +158,6 @@ namespace Gameplay.Towers
                     if (GameSettingsUtils.IsSoundEnabled())
                         GetComponent<AudioSource>().PlayOneShot(towerHighlightSoundEffect);
             }
-        }
-
-        /// <summary>
-        ///     Logic triggered when this tower kills something
-        /// </summary>
-        /// <param name="victim"> BoardPiece object for the thing that was killed </param>
-        public override void Killed(BoardPiece victim)
-        {
-            base.Killed(victim);
-            creepKillCounter += 1;
         }
     }
 }

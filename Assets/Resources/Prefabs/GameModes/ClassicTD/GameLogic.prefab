@@ -173,4 +173,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53377589c0e67859992840dac2f1dd5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveBuffs: []
+  testMaterial: {fileID: 2100000, guid: ecccbe4e95d209a64b32cb028f1faf48, type: 2}

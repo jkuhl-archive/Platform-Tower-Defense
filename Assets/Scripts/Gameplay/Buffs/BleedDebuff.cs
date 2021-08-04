@@ -5,37 +5,33 @@ namespace Gameplay.Buffs
 {
     public class BleedDebuff : Buff
     {
-        private readonly int bleedDamage = 1;
+        private const int BleedDamage = 1;
+        private const bool IsBuffRepeating = true;
+        private const float BuffDuration = 30;
+        private const float BuffRepeatFrequency = .3f;
 
         /// <summary>
         ///     Constructor
         /// </summary>
-        /// <param name="target"></param>
-        /// the object the buff is being applied to
-        public BleedDebuff(BoardPiece target) : base(target)
+        /// <param name="target"> Object the buff is being applied to </param>
+        public BleedDebuff(BoardPiece target) : base(target, IsBuffRepeating, BuffDuration, BuffRepeatFrequency)
         {
-            toggle = false;
-            duration = 3;
-            timeLeft = duration;
-            frequency = (float) .3;
-            timeTilRepeat = frequency;
         }
 
         /// <summary>
         ///     Define what the buff does
         /// </summary>
-        /// <param name="target"></param>
-        /// The object being buffed
         protected override void Effect()
         {
-            if (Target != null)
+            if (target != null)
             {
-                Target.TakeDamage(bleedDamage, Target);
+                base.Effect();
+                target.TakeDamage(BleedDamage, target);
                 Debug.Log("Ouch I'm bleeding!");
             }
             else
             {
-                active = false;
+                buffActive = false;
             }
         }
 

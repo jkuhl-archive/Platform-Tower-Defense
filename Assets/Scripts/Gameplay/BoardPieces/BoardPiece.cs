@@ -5,25 +5,61 @@ namespace Gameplay.BoardPieces
 {
     public abstract class BoardPiece : MonoBehaviour
     {
-        // TODO: Buff system rework
+        [Header("Starting Stats")]
+        [SerializeField] protected int startingHealth;
+        [SerializeField] protected int startingAttackDamage;
+        [SerializeField] protected float startingAttackSpeed;
+        [SerializeField] protected float startingMovementSpeed;
 
-        [Header("Starting Stats")] public int attackDamage;
+        [Header("Sound Effects")]
+        [SerializeField] protected AudioClip damageSoundEffect;
+        [SerializeField] protected AudioClip deathSoundEffect;
 
-        public int startingHealth;
-        public float movementSpeed;
-        public float attackSpeed;
+        // Board piece gameplay state variables
+        protected bool isAlive;
+        protected int currentAttackDamage;
+        protected float currentAttackSpeed;
+        protected int currentHealth;
+        protected float currentMovementSpeed;
 
-        [Header("Sound Effects")] public AudioClip damageSoundEffect;
-
-        public AudioClip deathSoundEffect;
-
-        private float currentHealth;
-        private bool isAlive;
-
+        // Start is called before the first frame update
         public virtual void Start()
         {
-            currentHealth = startingHealth;
             isAlive = true;
+            currentHealth = startingHealth;
+            currentAttackDamage = startingAttackDamage;
+            currentAttackSpeed = startingAttackSpeed;
+            currentMovementSpeed = startingMovementSpeed;
+        }
+
+        /// <summary>
+        ///     Logic for when this BoardPiece dies
+        /// </summary>
+        /// <param name="attacker"> BoardPiece that killed this BoardPiece </param>
+        protected virtual void Death(BoardPiece attacker)
+        {
+            isAlive = false;
+
+            if (GameSettingsUtils.IsSoundEnabled()) GetComponent<AudioSource>().PlayOneShot(deathSoundEffect);
+
+            attacker.KillTarget(this);
+        }
+
+        /// <summary>
+        ///     Logic triggered when this BoardPiece kills something
+        /// </summary>
+        /// <param name="victim"> BoardPiece object for the thing that was killed </param>
+        protected virtual void KillTarget(BoardPiece victim)
+        {
+        }
+
+        /// <summary>
+        ///     Gets the current attack damage of this board piece
+        /// </summary>
+        /// <returns> Current attack damage as an int </returns>
+        public int GetAttackDamage()
+        {
+            return currentAttackDamage;
         }
 
         /// <summary>
@@ -43,27 +79,6 @@ namespace Gameplay.BoardPieces
             {
                 if (GameSettingsUtils.IsSoundEnabled()) GetComponent<AudioSource>().PlayOneShot(damageSoundEffect);
             }
-        }
-
-        /// <summary>
-        ///     Logic for when this BoardPiece dies
-        /// </summary>
-        /// <param name="attacker"> BoardPiece that killed this BoardPiece </param>
-        public virtual void Death(BoardPiece attacker)
-        {
-            isAlive = false;
-
-            if (GameSettingsUtils.IsSoundEnabled()) GetComponent<AudioSource>().PlayOneShot(deathSoundEffect);
-
-            attacker.Killed(this);
-        }
-
-        /// <summary>
-        ///     Logic triggered when this BoardPiece kills something
-        /// </summary>
-        /// <param name="victim"> BoardPiece object for the thing that was killed </param>
-        public virtual void Killed(BoardPiece victim)
-        {
         }
     }
 }
