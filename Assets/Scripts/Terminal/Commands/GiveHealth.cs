@@ -6,12 +6,12 @@ namespace Terminal.Commands
     public class GiveHealth : ITerminalCommand
     {
         private const string Description = "Gives the player the given amount of health";
-        private const string UsageSyntax = "givehealth 100";
+        private const string UsageSyntax = "give_health 100";
 
         private readonly List<string> commandAliases = new List<string>
         {
-            "givehealth",
-            "give_health"
+            "give_health",
+            "givehealth"
         };
 
         /// <summary>
@@ -20,30 +20,28 @@ namespace Terminal.Commands
         /// <param name="args"> Arguments that were passed in with the command </param>
         public void Execute(List<string> args)
         {
-            if (GameUtils.IsGameInProgress() && !GameUtils.IsGamePaused())
-            {
-                var amount = 0;
-
-                if (args.Count > 0)
-                {
-                    var success = int.TryParse(args[0], out amount);
-                    if (!success)
-                    {
-                        GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Error,
-                            $"'{args[0]}' could be parsed to an int, Usage: '{GetUsageSyntax()}'");
-                        return;
-                    }
-                }
-
-                GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Info,
-                    $"Giving player {amount} HP");
-                GameUtils.GetPlayerLogic().UpdatePlayerHealth(amount);
-            }
-            else
+            if (!GameUtils.IsGameInProgress() || GameUtils.IsGamePaused())
             {
                 GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Error,
                     "Game is not in progress or is paused, cannot give player health");
+                return;
             }
+
+            var amount = 0;
+            if (args.Count > 0)
+            {
+                var success = int.TryParse(args[0], out amount);
+                if (!success)
+                {
+                    GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Error,
+                        $"'{args[0]}' could not be parsed to an int, Usage: '{GetUsageSyntax()}'");
+                    return;
+                }
+            }
+
+            GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Info,
+                $"Giving player {amount} HP");
+            GameUtils.GetPlayerLogic().UpdatePlayerHealth(amount);
         }
 
         /// <summary>

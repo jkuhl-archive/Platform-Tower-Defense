@@ -50,8 +50,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 65eabe933c6cbc84f8297300df4f97f1, type: 2}
   - {fileID: 2100000, guid: 4caf625a780a2ab758bb74dfc2341468, type: 2}
+  - {fileID: 2100000, guid: 65eabe933c6cbc84f8297300df4f97f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 3978763133221361122}
   - component: {fileID: 4067628360569196073}
   - component: {fileID: 1867269653047807516}
+  - component: {fileID: -2588070424507012229}
   - component: {fileID: 3602180375090959156}
   m_Layer: 0
   m_Name: TankGrunt
@@ -892,6 +893,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2588070424507012229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920149986052969328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54887a86a0632be9b0679d3881ff3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 20
+  startingAttackDamage: 10
+  startingAttackSpeed: 1
+  startingMovementSpeed: 2
+  damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
+  deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
 --- !u!114 &3602180375090959156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,12 +923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd60d166733af9db2fc9cacd36752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
-  startingAttackDamage: 10
-  startingAttackSpeed: 1
-  startingMovementSpeed: 2
-  damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
-  deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
   rewardAmount: 10
   despawnTime: 2.5
 --- !u!1 &3920179035578403042

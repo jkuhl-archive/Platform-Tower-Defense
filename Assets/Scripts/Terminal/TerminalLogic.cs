@@ -40,9 +40,12 @@ namespace Terminal
             // Populate list of available commands
             availableCommands.Add(new Clear());
             availableCommands.Add(new Exit());
+            availableCommands.Add(new GiveBuff());
             availableCommands.Add(new GiveHealth());
             availableCommands.Add(new GiveMoney());
             availableCommands.Add(new Help());
+            availableCommands.Add(new ListCreep());
+            availableCommands.Add(new ListTower());
         }
 
         // Update is called once per frame
@@ -155,7 +158,7 @@ namespace Terminal
         public void ProcessCommand(InputField terminalInput)
         {
             // Store input text and then clear the input field
-            var commandString = terminalInput.text;
+            var commandString = terminalInput.text.ToLower();
             terminalInput.text = string.Empty;
 
             // If the given command string is empty return immediately

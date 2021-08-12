@@ -18,7 +18,7 @@ namespace Gameplay.BoardPieces.Towers.TowerAttacks
         /// <param name="ammoSpawnPoint"> Position where ammo prefabs should be spawned </param>
         /// <param name="attackingTower"> Tower that is triggering this attack </param>
         /// <param name="targetCreep"> Creep that this attack is targeting </param>
-        public virtual void Attack(Vector3 ammoSpawnPoint, BoardPiece attackingTower, BoardPiece targetCreep)
+        public virtual void Attack(Vector3 ammoSpawnPoint, GameObject attackingTower, GameObject targetCreep)
         {
             var newAmmo = Instantiate(ammoPrefab, ammoSpawnPoint, ammoPrefab.transform.rotation);
             newAmmo.GetComponent<BaseAmmoLogic>().InitializeAmmo(attackingTower, targetCreep);

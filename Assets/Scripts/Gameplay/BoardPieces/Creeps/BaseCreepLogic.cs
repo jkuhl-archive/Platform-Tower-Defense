@@ -4,7 +4,7 @@ using Utilities;
 
 namespace Gameplay.BoardPieces.Creeps
 {
-    public class BaseCreepLogic : BoardPiece
+    public class BaseCreepLogic : MonoBehaviour
     {
         [Header("Creep Starting Stats")]
         [SerializeField] private int rewardAmount;
@@ -19,9 +19,8 @@ namespace Gameplay.BoardPieces.Creeps
         private List<GameObject> nodeList;
 
         // Start is called before the first frame update
-        public override void Start()
+        private void Start()
         {
-            base.Start();
             animator = GetComponent<Animator>();
             nodeList = GameUtils.GetMapLogic().GetNodeList();
         }
@@ -51,7 +50,7 @@ namespace Gameplay.BoardPieces.Creeps
                 var newPosition = new Vector3(nodeTransform.position.x, transform.position.y, nodeTransform.position.z);
 
                 transform.position = Vector3.MoveTowards(transform.position,
-                    newPosition, Time.deltaTime * currentMovementSpeed);
+                    newPosition, Time.deltaTime * GetComponent<BoardPieceLogic>().GetMovementSpeed());
 
                 if (Vector3.Distance(transform.position, newPosition) < 0.1f)
                 {
@@ -73,8 +72,8 @@ namespace Gameplay.BoardPieces.Creeps
         {
             isMoving = false;
             animator.SetBool("Victory", true);
-            GameUtils.GetPlayerLogic().UpdatePlayerHealth(-currentAttackDamage);
-            GameUtils.GetWaveManager().creepList.Remove(this);
+            GameUtils.GetPlayerLogic().UpdatePlayerHealth(-GetComponent<BoardPieceLogic>().GetAttackDamage());
+            GameUtils.GetWaveManager().creepList.Remove(gameObject);
             Destroy(gameObject, (float) (despawnTime * 0.1));
         }
 
@@ -82,13 +81,12 @@ namespace Gameplay.BoardPieces.Creeps
         ///     Handles the creep death workflow
         /// </summary>
         /// <param name="attacker"> BoardPiece that killed this creep </param>
-        protected override void Death(BoardPiece attacker)
+        public void CreepDeath(GameObject attacker)
         {
-            base.Death(attacker);
             isMoving = false;
             animator.SetBool("Death", true);
             GameUtils.GetPlayerLogic().UpdatePlayerMoney(rewardAmount);
-            GameUtils.GetWaveManager().creepList.Remove(this);
+            GameUtils.GetWaveManager().creepList.Remove(gameObject);
             Destroy(gameObject, despawnTime);
         }
     }

@@ -1,17 +1,21 @@
 using System.Collections.Generic;
+using Gameplay.BoardPieces;
+using UnityEngine;
 using Utilities;
 
 namespace Terminal.Commands
 {
-    public class GiveMoney : ITerminalCommand
+    public class ListCreep : ITerminalCommand
     {
-        private const string Description = "Gives the player the given amount of money";
-        private const string UsageSyntax = "give_money 100";
+        private const string Description = "Prints a list of creeps currently in play";
+        private const string UsageSyntax = "list_creeps";
 
         private readonly List<string> commandAliases = new List<string>
         {
-            "give_money",
-            "givemoney"
+            "list_creep",
+            "listcreep",
+            "list_creeps",
+            "listcreeps"
         };
 
         /// <summary>
@@ -23,25 +27,22 @@ namespace Terminal.Commands
             if (!GameUtils.IsGameInProgress() || GameUtils.IsGamePaused())
             {
                 GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Error,
-                    "Game is not in progress or is paused, cannot give player money");
+                    "Game is not in progress or is paused, cannot list creeps");
                 return;
             }
-            
-            var amount = 0;
-            if (args.Count > 0)
-            {
-                var success = int.TryParse(args[0], out amount);
-                if (!success)
-                {
-                    GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Error,
-                        $"'{args[0]}' could not be parsed to an int, Usage: '{GetUsageSyntax()}'");
-                    return;
-                }
-            }
+            GameObject[] creepListSnapshot = GameUtils.GetWaveManager().creepList.ToArray();
 
-            GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Info,
-                $"Giving player ${amount}");
-            GameUtils.GetPlayerLogic().UpdatePlayerMoney(amount);
+            GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Header,
+                StringUtils.FormatOutputString("Creep Type", "Creep ID", "Creep Health"));
+
+            for (var i = 0; i < GameUtils.GetWaveManager().creepList.Count; i++)
+            {
+                string creepInfoString = StringUtils.FormatOutputString(creepListSnapshot[i].name, $"{i}",
+                    $"{creepListSnapshot[i].GetComponent<BoardPieceLogic>().GetCurrentHealth()}/" +
+                    $"{creepListSnapshot[i].GetComponent<BoardPieceLogic>().GetStartingHealth()}");
+
+                GameUtils.GetTerminalLogic().WriteToTerminalOutput(TerminalOutputType.Info, creepInfoString);
+            }
         }
 
         /// <summary>

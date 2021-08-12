@@ -23,11 +23,11 @@ namespace Terminal.Commands
             var terminalLogic = GameUtils.GetTerminalLogic();
 
             terminalLogic.WriteToTerminalOutput(TerminalOutputType.Header,
-                GetFormattedString("Command Name", "Usage Syntax", "Description"));
+                StringUtils.FormatOutputString("Command Name", "Usage Syntax", "Description"));
 
             foreach (var command in terminalLogic.GetAvailableCommands())
             {
-                var info = GetFormattedString(command.GetCommandAliases()[0], command.GetUsageSyntax(),
+                var info = StringUtils.FormatOutputString(command.GetCommandAliases()[0], command.GetUsageSyntax(),
                     command.GetDescription());
                 terminalLogic.WriteToTerminalOutput(TerminalOutputType.Info, info);
             }
@@ -58,27 +58,6 @@ namespace Terminal.Commands
         public string GetUsageSyntax()
         {
             return UsageSyntax;
-        }
-
-        /// <summary>
-        ///     Generates a tab formatted string to make the help output look pretty
-        /// </summary>
-        /// <param name="string1"> First string to be included in the formatted string </param>
-        /// <param name="string2"> Second string to be included in the formatted string </param>
-        /// <param name="string3"> Third string to be included in the formatted string </param>
-        /// <returns> Formatted string containing the 3 input strings </returns>
-        private string GetFormattedString(string string1, string string2, string string3)
-        {
-            // Pads a given string with spaces to the desired segment length
-            string AutoFormat(string baseString, int segmentLength)
-            {
-                var remainder = segmentLength - baseString.Length;
-                return $"{baseString}{new string(' ', remainder)}";
-            }
-
-            return $"{AutoFormat(string1, 20)}" +
-                   $"{AutoFormat(string2, 20)}" +
-                   $"{AutoFormat(string3, 60)}";
         }
     }
 }

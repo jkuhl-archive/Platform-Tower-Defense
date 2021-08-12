@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gameplay.BoardPieces;
 using UnityEngine;
 using Utilities;
 
@@ -13,18 +12,18 @@ namespace Gameplay.WaveLogic
         [SerializeField] private string wavePlaylistName;
 
         [Header("Creep Prefabs")]
-        [SerializeField] private BoardPiece gruntPrefab;
-        [SerializeField] private BoardPiece fastGruntPrefab;
-        [SerializeField] private BoardPiece tankGruntPrefab;
+        [SerializeField] private GameObject gruntPrefab;
+        [SerializeField] private GameObject fastGruntPrefab;
+        [SerializeField] private GameObject tankGruntPrefab;
 
         [Header("Active Creeps")]
-        public List<BoardPiece> creepList;
+        public List<GameObject> creepList;
 
         // Creep spawn point
         private GameObject startPoint;
 
         // Dictionary that stores a list of creeps that were spawned in each round, creeps are removed as they die
-        private readonly Dictionary<int, List<BoardPiece>> waveActiveCreeps = new Dictionary<int, List<BoardPiece>>();
+        private readonly Dictionary<int, List<GameObject>> waveActiveCreeps = new Dictionary<int, List<GameObject>>();
 
         // Wave data used for spawning creeps
         private WavePlaylist wavePlaylist;
@@ -67,11 +66,12 @@ namespace Gameplay.WaveLogic
 
                 // Spawn creep and add it to the creep list
                 var newCreep = Instantiate(creepPrefab, startPoint.transform.position, startPoint.transform.rotation);
+                newCreep.name = creepPrefab.name;
                 creepList.Add(newCreep);
 
                 // Add newly spawned creep to list of creeps spawned during this wave
                 if (!waveActiveCreeps.ContainsKey(wavePlaylist.GetCurrentWaveNumber()))
-                    waveActiveCreeps.Add(wavePlaylist.GetCurrentWaveNumber(), new List<BoardPiece>());
+                    waveActiveCreeps.Add(wavePlaylist.GetCurrentWaveNumber(), new List<GameObject>());
                 waveActiveCreeps[wavePlaylist.GetCurrentWaveNumber()].Add(newCreep);
             }
 
@@ -101,7 +101,7 @@ namespace Gameplay.WaveLogic
         /// </summary>
         /// <param name="prefabName"> Name of the creep prefab we want to get </param>
         /// <returns> GameObject containing the creep prefab </returns>
-        private BoardPiece GetCreepPrefabByName(string prefabName)
+        private GameObject GetCreepPrefabByName(string prefabName)
         {
             switch (prefabName)
             {
@@ -118,7 +118,7 @@ namespace Gameplay.WaveLogic
         }
         
         /// <summary>
-        /// Gets the current wave number
+        ///     Gets the current wave number
         /// </summary>
         /// <returns> Value of waveDataIndex incremented by 1 to account for list indexes starting with 0 </returns>
         public int GetCurrentWaveNumber()
@@ -132,7 +132,7 @@ namespace Gameplay.WaveLogic
         }
         
         /// <summary>
-        /// Gets the status message that should be displayed
+        ///     Gets the status message that should be displayed
         /// </summary>
         /// <returns> Wave status message as a string </returns>
         public string GetWaveStatusMessage()
@@ -146,7 +146,7 @@ namespace Gameplay.WaveLogic
         }
 
         /// <summary>
-        /// Begins 'playing' the playlist and starts spawning creeps
+        ///     Begins 'playing' the playlist and starts spawning creeps
         /// </summary>
         public bool StartSpawning()
         {

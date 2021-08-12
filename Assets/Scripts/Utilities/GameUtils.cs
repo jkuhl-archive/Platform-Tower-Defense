@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using System.IO;
 using Gameplay;
-using Gameplay.BoardPieces;
-using Gameplay.Buffs;
+using Gameplay.BoardPieces.Creeps;
+using Gameplay.BuffLogic;
 using Gameplay.WaveLogic;
 using Menus;
 using Terminal;
@@ -20,6 +21,9 @@ namespace Utilities
         // Static location for storing a reference to objects that are never destroyed
         private static GameObject _gameLoadingObject;
         private static GameObject _terminalObject;
+        
+        // Effect material dictionary
+        private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
 
         /// <summary>
         ///     Exits the application
@@ -38,6 +42,12 @@ namespace Utilities
         {
             Debug.Log("Game Over!");
             _gameInProgress = false;
+            
+            // Kill any existing creeps
+            foreach (var creep in GetWaveManager().creepList.ToArray())
+            {
+                creep.GetComponent<BaseCreepLogic>().CreepDeath(null);
+            }
         }
 
         /// <summary>
@@ -101,9 +111,37 @@ namespace Utilities
             return GetRootGameObjectByName("GameUI").GetComponent<BaseGameUI>();
         }
 
+        /// <summary>
+        ///     Gets the BuffController object from the current scene
+        /// </summary>
+        /// <returns> BuffController object or null if it could not be found </returns>
         public static BuffController GetBuffController()
         {
             return GetRootGameObjectByName("GameLogic").GetComponent<BuffController>();
+        }
+
+        /// <summary>
+        ///     Gets an effect material from the resource folder or cache if it has been previously loaded
+        /// </summary>
+        /// <param name="materialName"> Name of the effect material we want to get </param>
+        /// <returns> Material for the effect </returns>
+        public static Material GetEffectMaterialByName(string materialName)
+        {
+            Material effectMaterial = null;
+            
+            string materialFilePath = Path.Combine("Effects", "Materials", materialName);
+
+            if (MaterialCache.ContainsKey(materialFilePath))
+            {
+                effectMaterial = MaterialCache[materialFilePath];
+            }
+            else if (ResourceFileExists(materialFilePath, "mat"))
+            {
+                effectMaterial = Resources.Load<Material>(materialFilePath);
+                MaterialCache.Add(materialFilePath, effectMaterial);
+            }
+
+            return effectMaterial;
         }
 
         /// <summary>
@@ -179,6 +217,7 @@ namespace Utilities
             if (Application.isEditor)
             {
                 var directoryPath = Path.Combine(Application.dataPath, "Resources", resourceDirectoryPath);
+                Debug.Log($"Checking for resource directory: '{directoryPath}'");
                 return Directory.Exists(directoryPath);
             }
             
@@ -198,6 +237,7 @@ namespace Utilities
             if (Application.isEditor)
             {
                 var filePath = Path.Combine(Application.dataPath, "Resources", $"{resourceFilePath}.{fileExtension}");
+                Debug.Log($"Checking for resource file: '{filePath}'");
                 return File.Exists(filePath);
             }
 

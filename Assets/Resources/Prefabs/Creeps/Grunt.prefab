@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 3644270492494497166}
   - component: {fileID: 4456159241791528517}
   - component: {fileID: 2039484745868303984}
+  - component: {fileID: 7393364542904270950}
   - component: {fileID: 3772302067279381336}
   m_Layer: 0
   m_Name: Grunt
@@ -806,6 +807,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7393364542904270950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3729896304444588828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54887a86a0632be9b0679d3881ff3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 6
+  startingAttackDamage: 1
+  startingAttackSpeed: 1
+  startingMovementSpeed: 4
+  damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
+  deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
 --- !u!114 &3772302067279381336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,12 +837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd60d166733af9db2fc9cacd36752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 6
-  startingAttackDamage: 1
-  startingAttackSpeed: 1
-  startingMovementSpeed: 4
-  damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
-  deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
   rewardAmount: 2
   despawnTime: 2.5
 --- !u!1 &3729933319882726760

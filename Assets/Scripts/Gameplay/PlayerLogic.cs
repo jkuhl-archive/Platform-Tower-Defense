@@ -183,6 +183,7 @@ namespace Gameplay
                 var newTower = Instantiate(towerPrefab, selectedObject.transform.position,
                     towerPrefab.transform.rotation);
                 newTower.transform.parent = selectedObject.transform;
+                newTower.name = towerPrefab.name;
 
                 Debug.Log($"Purchased tower {towerPrefab.name}");
             }

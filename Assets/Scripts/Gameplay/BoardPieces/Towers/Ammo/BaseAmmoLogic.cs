@@ -13,8 +13,8 @@ namespace Gameplay.BoardPieces.Towers.Ammo
 
         // Ammo behavior variables
         private bool isInitialized;
-        protected BoardPiece attackingTower;
-        protected BoardPiece targetCreep;
+        protected GameObject attackingTower;
+        protected GameObject targetCreep;
         private int ammoDamage;
 
         // Update is called once per frame
@@ -49,7 +49,7 @@ namespace Gameplay.BoardPieces.Towers.Ammo
         /// </summary>
         protected virtual void Collide()
         {
-            targetCreep.GetComponent<BaseCreepLogic>().TakeDamage(ammoDamage, attackingTower);
+            targetCreep.GetComponent<BoardPieceLogic>().TakeDamage(ammoDamage, attackingTower);
 
             if (ammoHitPrefab != null) Explode();
             Destroy(gameObject);
@@ -60,11 +60,11 @@ namespace Gameplay.BoardPieces.Towers.Ammo
         /// </summary>
         /// <param name="attackingTower"> Tower GameObject that generated the ammo GameObject </param>
         /// <param name="targetCreep"> Creep GameObject that the ammo being shot towards </param>
-        public void InitializeAmmo(BoardPiece attackingTower, BoardPiece targetCreep)
+        public void InitializeAmmo(GameObject attackingTower, GameObject targetCreep)
         {
             this.attackingTower = attackingTower;
             this.targetCreep = targetCreep;
-            ammoDamage = attackingTower.GetAttackDamage();
+            ammoDamage = attackingTower.GetComponent<BoardPieceLogic>().GetAttackDamage();
             isInitialized = true;
         }
     }

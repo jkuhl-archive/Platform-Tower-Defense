@@ -82,5 +82,52 @@ namespace Gameplay
         {
             return platformPrefab;
         }
+
+        /// <summary>
+        ///     Gets a dictionary containing the towers currently active in the game
+        ///     Key is a tuple, with the first int being the platform number and the second being the socket number
+        /// </summary>
+        /// <returns> Dictionary containing tower GameObjects in play </returns>
+        public Dictionary<Tuple<int, int>, GameObject> GetActiveTowers()
+        {
+            Dictionary<Tuple<int, int>, GameObject> activeTowers = new Dictionary<Tuple<int, int>, GameObject>();
+
+            for (var platformIndex = 0; platformIndex < platformList.Count; platformIndex++)
+            {
+                GameObject platform = platformList[platformIndex];
+                
+                for (var socketIndex = 0; socketIndex < platform.transform.childCount; socketIndex++)
+                {
+                    GameObject socket = platform.transform.GetChild(socketIndex).gameObject;
+
+                    if (socket.transform.childCount > 0)
+                    {
+                        GameObject tower = socket.transform.GetChild(0).gameObject;
+                        activeTowers.Add(new Tuple<int, int>(platformIndex, socketIndex), tower);
+                    }
+                }
+            }
+
+            return activeTowers;
+        }
+
+        /// <summary>
+        ///     Gets a tower GameObject by it's platform and socket
+        /// </summary>
+        /// <param name="platformIndex"> Platform number the tower is built on </param>
+        /// <param name="socketIndex"> Socket on the platform the tower is built on </param>
+        /// <returns> Tower GameObject </returns>
+        public GameObject GetTowerByIndex(int platformIndex, int socketIndex)
+        {
+            Dictionary<Tuple<int, int>, GameObject> activeTowers = GetActiveTowers();
+            Tuple<int, int> index = new Tuple<int, int>(platformIndex, socketIndex);
+
+            if (activeTowers.ContainsKey(index))
+            {
+                return activeTowers[index];
+            }
+
+            return null;
+        }
     }
 }

@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 401120246346428961}
   - component: {fileID: 780645770476808682}
   - component: {fileID: 3120898451864185311}
+  - component: {fileID: 2566209393568044574}
   - component: {fileID: 242056072490677495}
   m_Layer: 0
   m_Name: FastGrunt
@@ -465,6 +466,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2566209393568044574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342657181421073587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54887a86a0632be9b0679d3881ff3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 8
+  startingAttackDamage: 3
+  startingAttackSpeed: 1
+  startingMovementSpeed: 6
+  damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
+  deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
 --- !u!114 &242056072490677495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,12 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd60d166733af9db2fc9cacd36752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 8
-  startingAttackDamage: 3
-  startingAttackSpeed: 1
-  startingMovementSpeed: 6
-  damageSoundEffect: {fileID: 8300000, guid: 0a9e9ed291b0634eb87c3488784abd73, type: 3}
-  deathSoundEffect: {fileID: 8300000, guid: 53fed155c4847210cbaacc79edbd9dd7, type: 3}
   rewardAmount: 5
   despawnTime: 2.5
 --- !u!1 &342694267730291399
@@ -1186,8 +1199,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 65eabe933c6cbc84f8297300df4f97f1, type: 2}
   - {fileID: 2100000, guid: e4045c8f6e386955ab52ece7ad5f2675, type: 2}
+  - {fileID: 2100000, guid: 65eabe933c6cbc84f8297300df4f97f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
